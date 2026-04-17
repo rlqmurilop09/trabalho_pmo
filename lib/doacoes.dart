@@ -9,7 +9,7 @@ class doacoes extends StatelessWidget {
         title: Text("PetLar"),
         backgroundColor: Colors.blue[200],
       ),
-      body: center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
