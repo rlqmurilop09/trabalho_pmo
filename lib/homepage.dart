@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_pmo/doacoes.dart';
+import 'package:projeto_pmo/encontrar.dart';
 import 'package:projeto_pmo/historias.dart';
 import 'package:projeto_pmo/inicio.dart';
-import 'package:projeto_pmo/perdidos.dart';
 import 'package:projeto_pmo/perfil.dart';
 
 
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   List pages = [
   Inicio(),
   Historias(),
-  Perdidos(),
+  Encontrar(),
   Doacoes(),
   Perfil(),
 
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home) , label: 'Início'),
             BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Histórias'),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Perdidos'),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Encontrar'),
             BottomNavigationBarItem(icon: Icon(Icons.monetization_on), label: 'Doações'),
             BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: 'Perfil'
             ),
