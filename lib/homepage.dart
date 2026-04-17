@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:trabalho_pmo/inicio.dart';
-import 'package:trabalho_pmo/historias.dart';
-import 'package:trabalho_pmo/perfil.dart';
-import 'package:trabalho_pmo/perdidos.dart';
+import 'package:projeto_pmo/doacoes.dart';
+import 'package:projeto_pmo/historias.dart';
+import 'package:projeto_pmo/inicio.dart';
+import 'package:projeto_pmo/perdidos.dart';
+import 'package:projeto_pmo/perfil.dart';
+
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key})();
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -15,11 +17,11 @@ class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
 
   List pages = [
-  Início();
-  Historias();
-  Perdidos();
-  Doacoes();
-  Perfil();
+  Inicio(),
+  Historias(),
+  Perdidos(),
+  Doacoes(),
+  Perfil(),
 
   ];
 
@@ -37,7 +39,7 @@ class _HomePageState extends State<HomePage> {
           onTap: (index){
             setState(() {
               selectedIndex = index;
-            })
+            });
           },
 
           items: [
@@ -50,6 +52,6 @@ class _HomePageState extends State<HomePage> {
 
           ],
         )
-    )
+    );
   }
 }
