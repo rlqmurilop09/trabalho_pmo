@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_pmo/encontro.dart';
 
-void main() {
-  runApp(MaterialApp(home: encontro(),));
-}
-
+ class encontro extends
