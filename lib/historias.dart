@@ -60,7 +60,6 @@ class _HistoriasState extends State<Historias> {
               )
             ],
           ),
-
           SizedBox(height: 4),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
