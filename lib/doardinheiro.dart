@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class DoarDinheiroPage extends StatefulWidget {
+class DoarDinheiro extends StatefulWidget {
   @override
-  _DoarDinheiroPageState createState() => _DoarDinheiroPageState();
+  _DoarDinheiroState createState() => _DoarDinheiroState();
 }
 
-class _DoarDinheiroPageState extends State<DoarDinheiroPage> {
+class _DoarDinheiroState extends State<DoarDinheiro> {
   String? ongSelecionada;
   String? metodoPagamento;
   TextEditingController valorController = TextEditingController();

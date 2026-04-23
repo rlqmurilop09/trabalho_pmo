@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class DoarMantimentosPage extends StatefulWidget {
+class DoarMantimentos extends StatefulWidget {
   @override
-  _DoarMantimentosPageState createState() => _DoarMantimentosPageState();
+  _DoarMantimentosState createState() => _DoarMantimentosState();
 }
 
-class _DoarMantimentosPageState extends State<DoarMantimentosPage> {
+class _DoarMantimentosState extends State<DoarMantimentos> {
   String? ongSelecionada;
   String? tipoItem;
   TextEditingController especificacaoController = TextEditingController();
