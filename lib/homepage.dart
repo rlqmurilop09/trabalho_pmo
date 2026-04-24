@@ -4,21 +4,29 @@ import 'package:projeto_pmo/procura.dart';
 
 
 
+
+
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
+
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
+
 
   List pages = [
     Doacoes(),
     Procura(),
 
+
   ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +45,7 @@ class _HomePageState extends State<HomePage> {
             });
           },
 
+
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home) , label: 'Início'),
             BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Histórias'),
@@ -44,6 +53,7 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(icon: Icon(Icons.monetization_on), label: 'Doações'),
             BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: 'Perfil'
             ),
+
 
           ],
         )
