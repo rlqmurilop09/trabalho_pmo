@@ -44,8 +44,6 @@ class _InicioState extends State<Inicio> {
 
               )
             ],
-
-
           )
         ],
       ),
@@ -68,17 +66,18 @@ class _InicioState extends State<Inicio> {
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(32),
           borderSide: BorderSide(
-            color: Color(0xFF0B42A8), // 👈 cor da borda
+            color: Color(0xFF0B42A8), // cor da borda
             width: 2, // espessura
-          ),),
-         ),
+              ),
+            ),
+          ),
          ),
           ),
         SizedBox(height: 40),
 
           Container(
             height: 250, //  muda a altura aqui
-            width: double.infinity, // 👈 ocupa toda a largura da tela
+            width: double.infinity, // ocupa toda tela
 
             margin: EdgeInsets.symmetric(horizontal: 16),
 
@@ -126,7 +125,7 @@ class _InicioState extends State<Inicio> {
                 child: Row(
                   children: [
 
-                    Icon(Icons.event,
+                    Icon(Icons.notifications,
                         size: 30, color:
                         Color(0xFF0B42A8)),
 
@@ -137,7 +136,7 @@ class _InicioState extends State<Inicio> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Eventos",
+                          "Avisos",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -145,7 +144,7 @@ class _InicioState extends State<Inicio> {
                           ),
                         ),
                         Text(
-                          "Veja eventos próximos",
+                          "Veja avisos recentes",
                           style: TextStyle(
                             fontSize: 14,
                             color: Color(0xFF0B42A8),
@@ -215,8 +214,8 @@ class _InicioState extends State<Inicio> {
             ),
           ),
 
-         ], // <-- FECHA o children do Column
-        ),   // <-- FECHA o Column
+         ], // Column
+        ),
        );
 
 

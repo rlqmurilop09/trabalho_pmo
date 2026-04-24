@@ -16,7 +16,7 @@ class _EventosState extends State<Eventos> {
         title: Row(
           children: [
             Icon(
-              Icons.event,
+              Icons.notifications,
               color: Color(0xFF0B42A8),
               size: 30,
             ),
@@ -28,7 +28,7 @@ class _EventosState extends State<Eventos> {
               children: [
 
                 Text(
-                  "Eventos",
+                  "Avisos",
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -173,7 +173,8 @@ class _EventosState extends State<Eventos> {
 
                   SizedBox(width: 10),
 
-                  Column(
+                  Expanded(
+                    child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Campanha de Vacinação",
@@ -222,6 +223,7 @@ class _EventosState extends State<Eventos> {
                       ),
                     ],
                   ),
+                  ),
                 ],
               ),
             ),
@@ -264,7 +266,8 @@ class _EventosState extends State<Eventos> {
 
                   SizedBox(width: 10),
 
-                  Column(
+                  Expanded(
+                    child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Multirão de Limpeza no Abrigo",
@@ -311,7 +314,194 @@ class _EventosState extends State<Eventos> {
                           ],
                         ),
                       ),
+
                     ],
+                  ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          //botao4
+
+
+          SizedBox(height: 10),
+
+
+          SizedBox(
+            width: double.infinity,
+            height: 150,
+            child: ElevatedButton(
+              onPressed: () {},
+
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue[100],
+                  elevation: 2,
+                  padding: EdgeInsets.all(12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  )
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.orange[100],
+                      shape: BoxShape.circle,
+                    ),
+
+                    child: Icon(Icons.set_meal,
+                        color: Colors.orange,
+                        size: 30),
+                  ),
+
+                  SizedBox(width: 10),
+
+                  Expanded(
+                    child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Evento: Arrecadação de Alimentos",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF0B42A8),
+                        ),
+                      ),
+
+                      SizedBox(height: 10),
+
+                      Text("Nossa ONG conta com sua colaboração.",
+                        style: TextStyle(color: Color(0xFF0B42A8)
+                        ),
+                      ),
+
+
+                      SizedBox(height: 6),
+
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFE3E8FF),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.calendar_today,
+                              size: 12,
+                              color: Colors.blue,
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              "QUA 29/04 • 10:00",
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          //botao5
+
+          SizedBox(height: 10),
+
+
+          SizedBox(
+            width: double.infinity,
+            height: 150,
+            child: ElevatedButton(
+              onPressed: () {},
+
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue[100],
+                  elevation: 2,
+                  padding: EdgeInsets.all(12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  )
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.pink[100],
+                      shape: BoxShape.circle,
+                    ),
+
+                    child: Icon(Icons.pets,
+                        color: Colors.pink,
+                        size: 30),
+                  ),
+
+                  SizedBox(width: 10),
+
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Feira de Adoção",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF0B42A8),
+                          ),
+                        ),
+
+                        SizedBox(height: 10),
+
+                        Text("Conheça o seu futuro bichinho!",
+                          style: TextStyle(color: Color(0xFF0B42A8)
+                          ),
+                        ),
+
+
+                        SizedBox(height: 6),
+
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: Color(0xFFE3E8FF),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.calendar_today,
+                                size: 12,
+                                color: Colors.blue,
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                "DOM 03/05 • 15:00",
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
