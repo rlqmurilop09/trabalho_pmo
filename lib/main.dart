@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_pmo/doacoes.dart';
-import 'packaege:projeto'
+import 'package:projeto_pmo/procura.dart';
 
 void main() {
-  runApp(MaterialApp(home: doacoes(),));
+  runApp(MaterialApp(home: Doacoes(),));
 }
