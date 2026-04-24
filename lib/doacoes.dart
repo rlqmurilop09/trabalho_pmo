@@ -8,8 +8,6 @@ class Doacoes extends StatefulWidget {
   @override
   State<Doacoes> createState() => _DoacoesState();
 }
-
-
 class _DoacoesState extends State<Doacoes> {
   @override
   Widget build(BuildContext context) {
@@ -27,28 +25,40 @@ class _DoacoesState extends State<Doacoes> {
       body: ListView(
         children: [
           buildContainer(
-            urlImage: 'https://images.unsplash.com/photo-1600804340584-c7db2eacf0bf?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            nome: 'Carmem' ,
+            urlImage: 'https://static.todamateria.com.br/upload/sh/ut/shutterstock1411747946-cke.jpg',
+            nome: 'Mica' ,
             idade: '',
             genero: 'Femea',
-            especie: 'Especie: Cachorro',
+            especie: 'Especie: Coelho',
             porte: 'Porte: Pequeno',
-            raca: 'Raça: Golden Retriever',
+            raca: 'Raça: New Zealeand red',
             vacinado: 'Vacinado: sim',
             castrado: 'Castratado: não',
-            treinado: 'treinado: sim',
+            treinado: 'treinado: não',
           ),
           buildContainer(
-            urlImage:'https://images.unsplash.com/photo-1600804340584-c7db2eacf0bf?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            nome:'Lulu' ,
+            urlImage:'https://tudodebicho.vteximg.com.br/arquivos/lulu-da-pomerania-marrom.jpg',
+            nome:'Lina' ,
             idade:'',
             genero:'Femea',
             especie:'Especie: Cachorro',
-            porte:'Porte: Grande',
-            raca:'Raça: Golden Retriever',
+            porte:'Porte: Pequeno',
+            raca:'Raça: lulu da pomerania',
             vacinado:'Vacinado: sim',
             castrado:'Castratado: não',
-            treinado:'treinado: sim',
+            treinado:'treinado: não',
+          ),
+          buildContainer(
+            urlImage:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPyw5XkJrzCGPFjK_btUeBLGk2cWAtpmWFHg&s',
+            nome:'Hector' ,
+            idade:'3 anos',
+            genero:'Macho',
+            especie:'Especie: gato',
+            porte:'Porte: médio',
+            raca:'Raça: Persa',
+            vacinado:'Vacinado: sim',
+            castrado:'Castratado: sim',
+            treinado:'treinado: não',
           ),
         ],
       ),
@@ -56,8 +66,6 @@ class _DoacoesState extends State<Doacoes> {
     );
   }
 }
-
-
 buildContainer({
   required String urlImage,
   required String nome,
@@ -72,19 +80,30 @@ buildContainer({
 }){
   return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.all(20),
+      margin: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Color(0xFF8FB9E3),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Color(0xFFC9D4E5),
+            blurRadius: 8,
+            offset: Offset(2, 4),
+          )
+        ]
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             children: [
+
               ClipRRect(
-                child: Image.network(urlImage, height: 300, fit: BoxFit.cover),
-                borderRadius: BorderRadius.circular(6),
+                child: Image.network(urlImage, height: 400,width: double.infinity, fit: BoxFit.cover),
+                borderRadius: BorderRadius.circular(20),
               ),
             ],
           ),
-
 
           SizedBox(height: 4),
           Row(
@@ -92,9 +111,9 @@ buildContainer({
             children: [
               Text(
                 nome,
-                style: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 16),
+                style: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 20),
               ),
-              Row(children: [Text('3 anos'), Icon(Icons.pets, size: 16)]),
+              Row(children: [Text(''), Icon(Icons.pets, size: 20)]),
             ],
           ),
           Text(idade),
