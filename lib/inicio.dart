@@ -50,6 +50,9 @@ class _InicioState extends State<Inicio> {
         ],
       ),
       ),
+
+
+
       body: Column(
         children: [
 
@@ -154,10 +157,69 @@ class _InicioState extends State<Inicio> {
                 ),
               ),
             ),
-          )
-        ],
-    ),
+          ),
 
-    );
+          SizedBox(height: 30),
+
+          Padding(padding: EdgeInsets.symmetric(horizontal: 16),
+
+          child: SizedBox(
+            width: double.infinity,
+            height: 90,
+
+            child: ElevatedButton(
+              onPressed: () {},
+
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF90CAF9),
+                elevation: 5, // sombra
+
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+
+              child: Row(
+                children: [
+
+                  Icon(Icons.book,
+                  size: 30, color:
+                  Color(0xFF0B42A8)),
+
+               SizedBox(width: 15),
+
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    Text(
+                    "Histórias",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF0B42A8),
+                    ),
+                  ),
+                    Text(
+                   "Conheça histórias de sucesso",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Color(0xFF0B42A8),
+                    ),
+                    ),
+                    ],
+                  ),
+                ],
+              ),
+             ),
+            ),
+          ),
+
+         ], // <-- FECHA o children do Column
+        ),   // <-- FECHA o Column
+       );
+
+
+
   }
 }
