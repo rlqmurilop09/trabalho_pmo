@@ -53,34 +53,43 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
       backgroundColor: Colors.white,
 
       appBar: AppBar(
-        title: Text('Doar dinheiro'),
-        elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: Color(0xFF90CAF9),
+        title: Row(
+          children: [
+            Icon(
+              Icons.monetization_on,
+              color: Color(0xFF0B42A8),
+              size: 30,
+            ),
+            SizedBox(width: 10),
+
+            Column(
+              crossAxisAlignment:
+              CrossAxisAlignment.start,
+              children: [
+
+                Text(
+                  "Faça uma doação",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF0B42A8),
+                  ),
+                ),
+              ],
+
+
+            )
+          ],
+        ),
       ),
+
 
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// Título
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.blue.shade100,
-                  child: Icon(Icons.attach_money, color: Colors.blue),
-                ),
-                SizedBox(width: 10),
-                Text(
-                  'Faça uma doação',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
 
             SizedBox(height: 25),
 
