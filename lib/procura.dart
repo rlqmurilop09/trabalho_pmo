@@ -26,7 +26,7 @@ class _ProcuraState extends State<Procura> {
             botaoCard(
               icone: Icons.pets,
               titulo: "Adoção",
-              subtitulo: "Adote seu amiguinho",
+              subtitulo: "Adote seu Amiguinho",
             ),
 
             SizedBox(height: 20),
@@ -34,7 +34,7 @@ class _ProcuraState extends State<Procura> {
             botaoCard(
               icone: Icons.pets,
               titulo: "Animais Perdidos",
-              subtitulo: "Veja animais desaparecidos",
+              subtitulo: "Veja Animais Desaparecidos",
             ),
           ],
         ),

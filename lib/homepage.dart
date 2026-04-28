@@ -46,10 +46,7 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Histórias'),
             BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Procura'),
             BottomNavigationBarItem(icon: Icon(Icons.monetization_on), label: 'Doações'),
-            BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: 'Perfil'
-            ),
-
-
+            BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: 'Perfil'),
           ],
         )
     );
