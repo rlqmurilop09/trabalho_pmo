@@ -21,7 +21,6 @@ class _InicioState extends State<Inicio> {
               size: 30,
             ),
             SizedBox(width: 10),
-
             Column(
               crossAxisAlignment:
               CrossAxisAlignment.start,

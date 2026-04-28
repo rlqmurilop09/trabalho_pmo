@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-//tela concluida
-class Doacoes extends StatefulWidget {
-  const Doacoes({super.key});
+
+class Adocao extends StatefulWidget {
+  const Adocao({super.key});
 
   @override
-  State<Doacoes> createState() => _DoacoesState();
+  State<Adocao> createState() => _AdocaoState();
 }
-class _DoacoesState extends State<Doacoes> {
+
+class _AdocaoState extends State<Adocao> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,6 +16,8 @@ class _DoacoesState extends State<Doacoes> {
         title: Text("Adoção"),
         backgroundColor: Color(0xFF8FB9E3),
       ),
+
+      backgroundColor: Color(0xFFBBDEFB),
       body: ListView(
         children: [
           buildContainer(
@@ -25,9 +28,9 @@ class _DoacoesState extends State<Doacoes> {
             especie: 'Especie: Coelho',
             porte: 'Porte: Pequeno',
             raca: 'Raça: New Zealeand red',
-            vacinado: 'Vacinado: sim',
-            castrado: 'Castratado: não',
-            treinado: 'treinado: não',
+            vacinado: true,
+            castrado: false,
+            treinado: false,
           ),
           buildContainer(
             urlImage:'https://tudodebicho.vteximg.com.br/arquivos/lulu-da-pomerania-marrom.jpg',
@@ -37,9 +40,9 @@ class _DoacoesState extends State<Doacoes> {
             especie:'Especie: Cachorro',
             porte:'Porte: Pequeno',
             raca:'Raça: lulu da pomerania',
-            vacinado:'Vacinado: sim',
-            castrado:'Castratado: não',
-            treinado:'treinado: não',
+            vacinado: true,
+            castrado:false,
+            treinado: true,
           ),
           buildContainer(
             urlImage:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPyw5XkJrzCGPFjK_btUeBLGk2cWAtpmWFHg&s',
@@ -49,9 +52,9 @@ class _DoacoesState extends State<Doacoes> {
             especie:'Especie: gato',
             porte:'Porte: médio',
             raca:'Raça: Persa',
-            vacinado:'Vacinado: sim',
-            castrado:'Castratado: sim',
-            treinado:'treinado: não',
+            vacinado: true,
+            castrado: true,
+            treinado: true,
           ),
           buildContainer(
             urlImage:'https://odia.ig.com.br/_midias/jpg/2024/05/22/passaros_domesticos-32914698.jpg',
@@ -61,9 +64,9 @@ class _DoacoesState extends State<Doacoes> {
             especie:'Especie: Ave',
             porte:'Porte: Pequeno',
             raca:'Raça: Calopsita',
-            vacinado:'Vacinado: não',
-            castrado:'Castratado: não',
-            treinado:'treinado: não',
+            vacinado: false,
+            castrado: false,
+            treinado: false,
           ),
         ],
       ),
@@ -79,23 +82,24 @@ buildContainer({
   required String especie,
   required String porte,
   required String raca,
-  required String vacinado,
-  required String castrado,
-  required String treinado,
+  required bool vacinado,
+  required bool castrado,
+  required bool treinado,
 }){
+
   return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.all(12 ),
+      margin: EdgeInsets.all(20 ),
       decoration: BoxDecoration(
-        color: Color(0xFF8FB9E3),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xFFC9D4E5),
-            blurRadius: 8,
-            offset: Offset(2, 4),
-          )
-        ]
+          color: Color(0xFF8FB9E3),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xFFC9D4E5),
+              blurRadius: 8,
+              offset: Offset(2, 4),
+            )
+          ]
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +121,7 @@ buildContainer({
                 nome,
                 style: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 20),
               ),
-              Row(children: [Text(''), Icon(Icons.pets, size: 20)]),
+              Row(children: [Text('ONG: Patinha feliz '), Icon(Icons.pets, size: 20)]),
             ],
           ),
           Text(idade),
@@ -125,16 +129,12 @@ buildContainer({
           Text(especie),
           Text(porte),
           Text(raca),
-          Text(vacinado),
-          Text(castrado),
-          Text(treinado),
+          Text('Vacinado: ${vacinado ? "sim" : "não"}'),
+          Text('Castrado: ${castrado ? "sim" : "não"}'),
+          Text('Treinado: ${treinado ? "sim" : "não"}'),
         ],
       )
 
   );
 }
-
-
-
-
 

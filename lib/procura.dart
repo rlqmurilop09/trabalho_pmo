@@ -17,7 +17,7 @@ class _ProcuraState extends State<Procura> {
         backgroundColor: Color(0xFF8FB9E3),
 
       ),
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Color(0xFFBBDEFB),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
