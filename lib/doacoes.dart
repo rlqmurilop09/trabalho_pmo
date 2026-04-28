@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 class Doacoes extends StatefulWidget {
   const Doacoes({super.key});
 
-
   @override
   State<Doacoes> createState() => _DoacoesState();
 }
@@ -13,21 +12,15 @@ class _DoacoesState extends State<Doacoes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Icons.search),
-            suffixIcon: Icon(Icons.pets),
-            hintText: 'Pesquisar',
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
-          ),
-        ),
+        title: Text("Adoção"),
+        backgroundColor: Color(0xFF8FB9E3),
       ),
       body: ListView(
         children: [
           buildContainer(
             urlImage: 'https://static.todamateria.com.br/upload/sh/ut/shutterstock1411747946-cke.jpg',
             nome: 'Mica' ,
-            idade: '',
+            idade: '5 meses',
             genero: 'Femea',
             especie: 'Especie: Coelho',
             porte: 'Porte: Pequeno',
@@ -39,7 +32,7 @@ class _DoacoesState extends State<Doacoes> {
           buildContainer(
             urlImage:'https://tudodebicho.vteximg.com.br/arquivos/lulu-da-pomerania-marrom.jpg',
             nome:'Lina' ,
-            idade:'',
+            idade:'1 anos',
             genero:'Femea',
             especie:'Especie: Cachorro',
             porte:'Porte: Pequeno',
@@ -58,6 +51,18 @@ class _DoacoesState extends State<Doacoes> {
             raca:'Raça: Persa',
             vacinado:'Vacinado: sim',
             castrado:'Castratado: sim',
+            treinado:'treinado: não',
+          ),
+          buildContainer(
+            urlImage:'https://odia.ig.com.br/_midias/jpg/2024/05/22/passaros_domesticos-32914698.jpg',
+            nome:'Pepita' ,
+            idade:'1 anos',
+            genero:'Femea',
+            especie:'Especie: Ave',
+            porte:'Porte: Pequeno',
+            raca:'Raça: Calopsita',
+            vacinado:'Vacinado: não',
+            castrado:'Castratado: não',
             treinado:'treinado: não',
           ),
         ],
@@ -80,7 +85,7 @@ buildContainer({
 }){
   return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.all(12),
+      margin: EdgeInsets.all(12 ),
       decoration: BoxDecoration(
         color: Color(0xFF8FB9E3),
         borderRadius: BorderRadius.circular(16),
@@ -97,7 +102,6 @@ buildContainer({
         children: [
           Stack(
             children: [
-
               ClipRRect(
                 child: Image.network(urlImage, height: 400,width: double.infinity, fit: BoxFit.cover),
                 borderRadius: BorderRadius.circular(20),
@@ -126,7 +130,6 @@ buildContainer({
           Text(treinado),
         ],
       )
-
 
   );
 }

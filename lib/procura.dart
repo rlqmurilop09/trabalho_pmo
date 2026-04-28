@@ -15,6 +15,7 @@ class _ProcuraState extends State<Procura> {
       appBar: AppBar(
         title: Text("Procura"),
         backgroundColor: Color(0xFF8FB9E3),
+
       ),
       backgroundColor: Colors.grey[200],
       body: Padding(

@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:projeto_pmo/doacoes.dart';
 import 'package:projeto_pmo/procura.dart';
 
-
-
-
-
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -49,7 +44,7 @@ class _HomePageState extends State<HomePage> {
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home) , label: 'Início'),
             BottomNavigationBarItem(icon: Icon(Icons.book), label: 'Histórias'),
-            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Encontrar'),
+            BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Procura'),
             BottomNavigationBarItem(icon: Icon(Icons.monetization_on), label: 'Doações'),
             BottomNavigationBarItem(icon: Icon(Icons.account_circle_outlined), label: 'Perfil'
             ),
