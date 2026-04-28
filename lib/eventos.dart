@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Eventos extends StatefulWidget {
-  const Eventos({super.key});
+class Avisos extends StatefulWidget {
+  const Avisos({super.key});
 
   @override
-  State<Eventos> createState() => _EventosState();
+  State<Avisos> createState() => _AvisosState();
 }
 
-class _EventosState extends State<Eventos> {
+class _AvisosState extends State<Avisos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

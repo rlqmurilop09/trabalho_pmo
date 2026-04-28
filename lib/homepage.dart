@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_pmo/doacoes.dart';
 import 'package:projeto_pmo/encontrar.dart';
-//import 'package:projeto_pmo/historias.dart';
-
 import 'package:projeto_pmo/inicio.dart';
 import 'package:projeto_pmo/perfil.dart';
 
