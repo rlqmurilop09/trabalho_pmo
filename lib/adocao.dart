@@ -15,6 +15,7 @@ class _AdocaoState extends State<Adocao> {
       appBar: AppBar(title: Text("Adoção"), backgroundColor: Color(0xFF8FB9E3)),
 
       backgroundColor: Color(0xFFBBDEFB),
+     //conteudo principal, elementos
       body: ListView(
         children: [
           buildContainer(
@@ -35,9 +36,9 @@ class _AdocaoState extends State<Adocao> {
             nome: 'Lina',
             idade: 'Idade: 2 anos',
             genero: 'Gênero: Fêmea',
-            especie: 'Especie: Cachorro',
-            porte: 'Porte: Pequeno',
-            raca: 'Raça: lulu da pomerania',
+            especie: 'Espécie: Cachorro',
+            porte: 'Porte: Grande',
+            raca: 'Raça: SRD (Sem raça definida)',
             vacinado: 'Vacinado',
             castrado: 'Castrado',
           ),
@@ -82,11 +83,8 @@ class _AdocaoState extends State<Adocao> {
     required String vacinado,
     required String castrado,
   }) {
-    Widget({
-      required IconData icone,
-      required String titulo,
-      required String subtitulo,
-    }) {}
+
+
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.all(16),
@@ -98,7 +96,7 @@ class _AdocaoState extends State<Adocao> {
           BoxShadow(
             color: Color(0xFFC9D4E5),
             blurRadius: 8,
-            offset: Offset(2, 4),
+            offset: Offset(4, 8),
           ),
         ],
       ),
@@ -138,15 +136,12 @@ class _AdocaoState extends State<Adocao> {
               ),
             ],
           ),
-          SizedBox(height: 4),
+          SizedBox(height: 2),
           Text(genero),
           Text(idade),
-          Text(genero),
           Text(especie),
           Text(porte),
           Text(raca),
-          Text('Especie ' + especie),
-          Text('Castrado ' + castrado),
           SizedBox(height: 8),
           pin(vacina: vacinado, castrado: castrado),
         ],
@@ -171,7 +166,7 @@ class _AdocaoState extends State<Adocao> {
             )),
           ),
         ),
-        SizedBox(height: 8),
+
         Container(
           width: 70,
           height: 25,
