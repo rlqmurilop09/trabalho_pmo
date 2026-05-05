@@ -21,40 +21,37 @@ class _AdocaoState extends State<Adocao> {
             urlImage:
             'https://static.todamateria.com.br/upload/sh/ut/shutterstock1411747946-cke.jpg',
             nome: 'Mica',
-            idade: '5 meses',
-            genero: 'Femea',
-            especie: 'Especie: Coelho',
+            idade: 'Idade: 5 meses',
+            genero: 'Gênero: Fêmea',
+            especie: 'Espécie: Coelho',
             porte: 'Porte: Pequeno',
             raca: 'Raça: New Zealeand red',
-            vacinado: true,
-            castrado: false,
-            treinado: false,
+            vacinado: 'Vacinado',
+            castrado: 'Castrado',
           ),
           buildContainer(
             urlImage:
             'https://i.pinimg.com/736x/e1/f8/f0/e1f8f02350b47bc169feb4664329a898.jpg',
             nome: 'Lina',
-            idade: '2 anos',
-            genero: 'Femea',
+            idade: 'Idade: 2 anos',
+            genero: 'Gênero: Fêmea',
             especie: 'Especie: Cachorro',
             porte: 'Porte: Pequeno',
             raca: 'Raça: lulu da pomerania',
-            vacinado: true,
-            castrado: false,
-            treinado: true,
+            vacinado: 'Vacinado',
+            castrado: 'Castrado',
           ),
           buildContainer(
             urlImage:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPyw5XkJrzCGPFjK_btUeBLGk2cWAtpmWFHg&s',
             nome: 'Hector',
-            idade: '3 anos',
-            genero: 'Macho',
+            idade: 'Idade: 3 anos',
+            genero: 'Gênero: Macho',
             especie: 'Especie: gato',
             porte: 'Porte: médio',
             raca: 'Raça: Persa',
-            vacinado: true,
-            castrado: true,
-            treinado: true,
+            vacinado: 'Vacinado',
+            castrado: 'Castrado',
           ),
           buildContainer(
             urlImage:
@@ -65,9 +62,8 @@ class _AdocaoState extends State<Adocao> {
             especie: 'Especie: Ave',
             porte: 'Porte: Pequeno',
             raca: 'Raça: Calopsita',
-            vacinado: false,
-            castrado: false,
-            treinado: false,
+            vacinado: 'X',
+            castrado: 'Castrado',
           ),
         ],
       ),
@@ -83,9 +79,8 @@ class _AdocaoState extends State<Adocao> {
     required String especie,
     required String porte,
     required String raca,
-    required bool vacinado,
-    required bool castrado,
-    required bool treinado,
+    required String vacinado,
+    required String castrado,
   }) {
     Widget({
       required IconData icone,
@@ -144,54 +139,54 @@ class _AdocaoState extends State<Adocao> {
             ],
           ),
           SizedBox(height: 4),
-
-          Wrap(
-            spacing: 4,
-            children: [
-              // Text(idade),
-              // Text(genero),
-              // Text(especie),
-              // Text(porte),
-              // Text(raca),
-              //
-              // Text('Vacinado: ${vacinado ? "sim" : "não"}'),
-              // Text('Castrado: ${castrado ? "sim" : "não"}'),
-              // Text('Treinado: ${treinado ? "sim" : "não"}'),
-              buildChip('Vacinado', Colors.lightBlueAccent.shade100, Colors.blue),
-              buildChip('Vacinado', Colors.lightBlueAccent.shade100, Colors.blue),
-              buildChip('Vacinado', Colors.lightBlueAccent.shade100, Colors.blue),
-              buildChip('Vacinado', Colors.lightBlueAccent.shade100, Colors.blue),
-              buildChip('Vacinado', Colors.lightBlueAccent.shade100, Colors.blue),
-              Chip(
-                label: Text('Treinado', style: TextStyle(color: Colors.green)),
-                padding: EdgeInsets.zero,
-                labelPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-                backgroundColor: Colors.greenAccent.shade100,
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.transparent),
-                  borderRadius: BorderRadius.all(Radius.circular(32)),
-                ),
-              ),
-            ],
-          )
-
-
+          Text(genero),
+          Text(idade),
+          Text(genero),
+          Text(especie),
+          Text(porte),
+          Text(raca),
+          Text('Especie ' + especie),
+          Text('Castrado ' + castrado),
+          SizedBox(height: 8),
+          pin(vacina: vacinado, castrado: castrado),
         ],
       ),
     );
   }
-  
-  buildChip(String text, Color backgroundColor, Color textColor){
-    return Chip(
-      label: Text(text, style: TextStyle(color: textColor)),
-      padding: EdgeInsets.zero,
-      labelPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-      backgroundColor: backgroundColor,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.transparent),
-        borderRadius: BorderRadius.all(Radius.circular(32)),
-      ),
+
+  pin({required String vacina, required String castrado}){
+    return Row(
+      children: [
+        Container(
+          width: 70,
+          height: 25,
+          decoration: BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.circular(16)
+          ),
+
+          child: Center(
+            child: Text(vacina,style: TextStyle(
+                fontSize: 13
+            )),
+          ),
+        ),
+        SizedBox(height: 8),
+        Container(
+          width: 70,
+          height: 25,
+          decoration: BoxDecoration(
+              color: Colors.lightBlueAccent,
+              borderRadius: BorderRadius.circular(16)
+          ),
+
+          child: Center(
+            child: Text(castrado,style: TextStyle(
+                fontSize: 13
+            )),
+          ),
+        ),
+      ],
     );
   }
-
 }
