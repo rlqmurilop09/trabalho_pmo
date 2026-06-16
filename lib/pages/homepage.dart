@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_pmo/doacoes.dart';
-import 'package:projeto_pmo/encontrar.dart';
-import 'package:projeto_pmo/inicio.dart';
-import 'package:projeto_pmo/perfil.dart';
+import 'package:projeto_pmo/pages/doacoes.dart';
+import 'package:projeto_pmo/pages/encontrar.dart';
+import 'package:projeto_pmo/pages/inicio.dart';
+import 'package:projeto_pmo/pages/perfil.dart';
 
 
 class HomePage extends StatefulWidget {
