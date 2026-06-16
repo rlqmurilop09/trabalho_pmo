@@ -40,11 +40,11 @@ class _ContainerBotaoState extends State<ContainerBotao> {
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: widget.aviso.corFundoIcone,
+                  color: widget.aviso.corFundo,
                   shape: BoxShape.circle,
                 ),
                 child: Icon(
-                  widget.aviso.icone,
+                  Icons.pets,
                   color: widget.aviso.corIcone,
                   size: 30,
                 ),
