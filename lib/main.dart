@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_pmo/doarmantimentos.dart';
-import 'package:projeto_pmo/doardinheiro.dart';
-import 'package:projeto_pmo/homepage.dart';
+import 'package:projeto_pmo/pages//doarmantimentos.dart';
+import 'package:projeto_pmo/pages/doardinheiro.dart';
+import 'package:projeto_pmo/pages/homepage.dart';
 
 void main() {
-  runApp(MaterialApp(home: HomePage()));
+  runApp(MaterialApp(home: DoarDinheiro()));
 }
