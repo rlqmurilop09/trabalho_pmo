@@ -1,9 +1,11 @@
-import 'package:flutter/material.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:google_fonts/google_fonts.dart";
+import "../domain/propriedade.dart";
 
 class ContainerPropriedade extends StatefulWidget {
-  Propriedade propriedade;
-
-  const ContainerPropriedade({super.key});
+  final Propriedade propriedade;
+  const ContainerPropriedade({super.key, required this.propriedade});
 
   @override
   State<ContainerPropriedade> createState() => _ContainerPropriedadeState();
@@ -34,7 +36,7 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
             children: [
               ClipRRect(
                 child: Image.network(
-                  urlImage,
+                  widget.propriedade.urlImage,
                   height: 400,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -49,7 +51,7 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                nome,
+                widget.propriedade.nome,
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -64,13 +66,13 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
             ],
           ),
           SizedBox(height: 2),
-          Text(genero),
-          Text(idade),
-          Text(especie),
-          Text(porte),
-          Text(raca),
+          Text(widget.propriedade.genero),
+          Text(widget.propriedade.idade),
+          Text(widget.propriedade.especie),
+          Text(widget.propriedade.porte),
+          Text(widget.propriedade.raca),
           SizedBox(height: 8),
-          pin(vacina: vacinado, castrado: castrado),
+          pin(vacina: widget.propriedade.vacinado, castrado: widget.propriedade.castrado),
         ],
       ),
     );
@@ -111,8 +113,5 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
       ],
     );
   }
-}
-  }
-}
 
-
+}

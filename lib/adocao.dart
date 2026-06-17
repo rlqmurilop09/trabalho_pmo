@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'db/propriedade_dao.dart';
+
 class Adocao extends StatefulWidget {
   const Adocao({super.key});
 
