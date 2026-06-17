@@ -17,4 +17,19 @@ class Aviso {
 
 
 
+  Aviso.fromJson(Map <String, dynamic> json){
+    corIcone = json['corIcone'];
+    corFundo = json['corFundo'];
+    titulo = json['titulo'];
+    descricao = json['descricao'];
+    data = json['data'];
+  }
+
+
+  Color get corIconeColor =>
+      Color(int.parse(corIcone.replaceFirst('#', 'FF'), radix: 16));
+
+  Color get corFundoColor =>
+      Color(int.parse(corFundo.replaceFirst('#', 'FF'), radix: 16));
+
 }
