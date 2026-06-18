@@ -1,7 +1,6 @@
-import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
-import "../domain/propriedade.dart";
+import "package:projeto_pmo/domain/propriedade.dart";
 
 class ContainerPropriedade extends StatefulWidget {
   final Propriedade propriedade;
@@ -10,7 +9,6 @@ class ContainerPropriedade extends StatefulWidget {
   @override
   State<ContainerPropriedade> createState() => _ContainerPropriedadeState();
 }
-
 class _ContainerPropriedadeState extends State<ContainerPropriedade> {
   @override
   Widget build(BuildContext context) {
@@ -32,18 +30,14 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
-            children: [
-              ClipRRect(
-                child: Image.network(
-                  widget.propriedade.urlImage,
-                  height: 400,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ],
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.network(
+              widget.propriedade.urlImage,
+              width: double.infinity,
+              height: 180,
+              fit: BoxFit.cover,
+            ),
           ),
 
           SizedBox(height: 4),

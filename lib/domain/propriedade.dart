@@ -1,4 +1,3 @@
-
 class Propriedade {
   late String urlImage;
   late String nome;

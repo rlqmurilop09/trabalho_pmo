@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'db/propriedade_dao.dart';
+import 'domain/propriedade.dart';
 
 class Adocao extends StatefulWidget {
   const Adocao({super.key});
@@ -11,7 +11,22 @@ class Adocao extends StatefulWidget {
 }
 
 class _AdocaoState extends State<Adocao> {
+  List<Propriedade> listaPropriedades = [];
+
   @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    // Busca os dados no seu DAO
+    listaPropriedades = await PropriedadeDao().listarPropriedades();
+    // Atualiza a tela para exibir os dados após o carregamento
+    setState(() {
+      var isLoading = false;
+    });
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Adoção"), backgroundColor: Color(0xFF8FB9E3)),
@@ -105,19 +120,6 @@ class _AdocaoState extends State<Adocao> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
-            children: [
-              ClipRRect(
-                child: Image.network(
-                  urlImage,
-                  height: 400,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ],
-          ),
 
           SizedBox(height: 4),
           Row(
