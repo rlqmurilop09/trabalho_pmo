@@ -15,7 +15,6 @@ class Adocao extends StatefulWidget {
 
 class _AdocaoState extends State<Adocao> {
   List<Propriedade> listaPropriedades = [];
-  PropriedadeDao adocaodao = PropriedadeDao();
 
 
   @override
@@ -25,9 +24,7 @@ class _AdocaoState extends State<Adocao> {
   }
   loadData() async {
     listaPropriedades = await PropriedadeDao().listarPropriedades();
-    setState(() {
-      var isLoading = false;
-    });
+    setState(() {});
   }
 
 
@@ -37,9 +34,9 @@ class _AdocaoState extends State<Adocao> {
       backgroundColor: Color(0xFFBBDEFB),
       body: ListView.builder(
         itemCount: listaPropriedades.length,
-        itemBuilder: (context, index) {
+        itemBuilder: (context, i) {
           return ContainerAdocao(
-            propriedade: listaPropriedades[index],
+            propriedade: listaPropriedades[i],
           );
         },
       ),

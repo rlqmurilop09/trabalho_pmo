@@ -1,17 +1,21 @@
-import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
-import "../domain/propriedade.dart";
+import "package:projeto_pmo/domain/propriedade.dart";
 
-class ContainerPropriedade extends StatefulWidget {
-  final Propriedade propriedade;
-  const ContainerPropriedade({super.key, required this.propriedade});
+
+class ContainerAdocao extends StatefulWidget {
+  Propriedade propriedade;
+
+
+  ContainerAdocao({super.key, required this.propriedade});
+
 
   @override
-  State<ContainerPropriedade> createState() => _ContainerPropriedadeState();
+  State<ContainerAdocao> createState() => _ContainerAdocaoState();
 }
 
-class _ContainerPropriedadeState extends State<ContainerPropriedade> {
+
+class _ContainerAdocaoState extends State<ContainerAdocao> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,21 +36,18 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
-            children: [
-              ClipRRect(
-                child: Image.network(
-                  widget.propriedade.urlImage,
-                  height: 400,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ],
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.network(
+              widget.propriedade.urlImage,
+              width: double.infinity,
+              height: 180,
+              fit: BoxFit.cover,
+            ),
           ),
 
-          SizedBox(height: 4),
+
+          const SizedBox(height: 4),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -78,6 +79,7 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
     );
   }
 
+
   pin({required String vacina, required String castrado}){
     return Row(
       children: [
@@ -89,12 +91,14 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
               borderRadius: BorderRadius.circular(16)
           ),
 
+
           child: Center(
             child: Text(vacina,style: TextStyle(
                 fontSize: 13
             )),
           ),
         ),
+
 
         Container(
           width: 70,
@@ -103,6 +107,7 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
               color: Colors.lightBlueAccent,
               borderRadius: BorderRadius.circular(16)
           ),
+
 
           child: Center(
             child: Text(castrado,style: TextStyle(
@@ -114,4 +119,6 @@ class _ContainerPropriedadeState extends State<ContainerPropriedade> {
     );
   }
 
+
 }
+

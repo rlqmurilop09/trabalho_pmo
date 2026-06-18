@@ -1,23 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'db/propriedade_dao.dart';
+import 'domain/propriedade.dart';
+
 
 class Adocao extends StatefulWidget {
   const Adocao({super.key});
+
 
   @override
   State<Adocao> createState() => _AdocaoState();
 }
 
+
 class _AdocaoState extends State<Adocao> {
+  List<Propriedade> listaPropriedades = [];
+
+
   @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+
+  loadData() async {
+    // Busca os dados no seu DAO
+    listaPropriedades = await PropriedadeDao().listarPropriedades();
+    // Atualiza a tela para exibir os dados após o carregamento
+    setState(() {
+      var isLoading = false;
+    });
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Adoção"), backgroundColor: Color(0xFF8FB9E3)),
 
+
       backgroundColor: Color(0xFFBBDEFB),
-     //conteudo principal, elementos
+      //conteudo principal, elementos
       body: ListView(
         children: [
           buildContainer(
@@ -74,6 +95,8 @@ class _AdocaoState extends State<Adocao> {
   }
 
 
+
+
   buildContainer({
     required String urlImage,
     required String nome,
@@ -85,6 +108,8 @@ class _AdocaoState extends State<Adocao> {
     required String vacinado,
     required String castrado,
   }) {
+
+
 
 
     return Container(
@@ -105,19 +130,7 @@ class _AdocaoState extends State<Adocao> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
-            children: [
-              ClipRRect(
-                child: Image.network(
-                  urlImage,
-                  height: 400,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ],
-          ),
+
 
           SizedBox(height: 4),
           Row(
@@ -151,6 +164,7 @@ class _AdocaoState extends State<Adocao> {
     );
   }
 
+
   pin({required String vacina, required String castrado}){
     return Row(
       children: [
@@ -162,12 +176,14 @@ class _AdocaoState extends State<Adocao> {
               borderRadius: BorderRadius.circular(16)
           ),
 
+
           child: Center(
             child: Text(vacina,style: TextStyle(
                 fontSize: 13
             )),
           ),
         ),
+
 
         Container(
           width: 70,
@@ -176,6 +192,7 @@ class _AdocaoState extends State<Adocao> {
               color: Colors.lightBlueAccent,
               borderRadius: BorderRadius.circular(16)
           ),
+
 
           child: Center(
             child: Text(castrado,style: TextStyle(
@@ -187,3 +204,4 @@ class _AdocaoState extends State<Adocao> {
     );
   }
 }
+

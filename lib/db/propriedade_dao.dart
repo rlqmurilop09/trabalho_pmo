@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
-import '../domain/propriedade.dart';
+import 'package:projeto_pmo/domain/propriedade.dart';
 import 'db_helper.dart';
+
 
 class PropriedadeDao{
   Future<List<Propriedade>> listarPropriedades() async {
@@ -14,3 +15,6 @@ class PropriedadeDao{
     return listaPropriedades;
   }
 }
+
+
+
