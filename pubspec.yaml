@@ -37,6 +37,8 @@ dependencies:
   google_fonts: ^8.0.2
 
 dev_dependencies:
+  sqflite:
+  path:
   flutter_test:
     sdk: flutter
 

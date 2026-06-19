@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projeto_pmo/db/propriedade_dao.dart';
+import 'package:projeto_pmo/domain/historia_animal.dart';
+import 'package:projeto_pmo/widget/container_historia.dart';
 
 
 class Historias extends StatefulWidget {
