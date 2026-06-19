@@ -16,7 +16,21 @@ class Historias extends StatefulWidget {
 
 class _HistoriasState extends State<Historias> {
 
+  List<HistoriaAnimal> listaHistorias = [];
+  bool carregando = true;
 
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+  loadData() async {
+    listaHistorias = await HistoriaDao().listarHistorias();
+    await Future.delayed(const Duration(seconds: 2));
+    setState(() {
+      carregando = false;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +47,16 @@ class _HistoriasState extends State<Historias> {
           ),
         ),
       ),
-      backgroundColor: Color(0xFFBBDEFD),
+      backgroundColor: const Color(0xFFBBDEFD),
+        body: carregando
+            ? const Center(child: CircularProgressIndicator(color: Colors.blue))
+            : ListView.builder(
+            itemCount: listaHistorias.length,
+            itemBuilder: (context, i) {
+
+              return ContainerHistoria(historia: listaHistorias[i]);
+    }
+    )
       body: ListView(
         children: [
           buildContainer(
