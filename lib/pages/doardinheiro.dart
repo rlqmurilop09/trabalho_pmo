@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_pmo/db/db_helper.dart';
 
 class DoarDinheiro extends StatefulWidget {
   @override
@@ -8,7 +9,10 @@ class DoarDinheiro extends StatefulWidget {
 class _DoarDinheiroState extends State<DoarDinheiro> {
   String? ongSelecionada;
   String? metodoPagamento;
+
   TextEditingController valorController = TextEditingController();
+
+  final DbHelper dbHelper = DbHelper();
 
   Widget _buildOpcao({
     required String titulo,
@@ -25,7 +29,10 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(titulo, style: TextStyle(fontSize: 16)),
+            Text(
+              titulo,
+              style: TextStyle(fontSize: 16),
+            ),
             Container(
               width: 22,
               height: 22,
@@ -35,16 +42,70 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(6),
-                color: selecionado ? Colors.blue : Colors.transparent,
+                color:
+                selecionado ? Colors.blue : Colors.transparent,
               ),
               child: selecionado
-                  ? Icon(Icons.check, size: 16, color: Colors.white)
+                  ? Icon(
+                Icons.check,
+                size: 16,
+                color: Colors.white,
+              )
                   : null,
             )
           ],
         ),
       ),
     );
+  }
+
+  Future<void> salvarDoacao() async {
+    if (ongSelecionada == null ||
+        metodoPagamento == null ||
+        valorController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Preencha todos os campos'),
+        ),
+      );
+      return;
+    }
+
+    try {
+      await dbHelper.inserirDoacao(
+        ong: ongSelecionada!,
+        valor: double.parse(
+          valorController.text.replaceAll(',', '.'),
+        ),
+        metodoPagamento: metodoPagamento!,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Doação registrada com sucesso!'),
+        ),
+      );
+
+      setState(() {
+        ongSelecionada = null;
+        metodoPagamento = null;
+        valorController.clear();
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Erro ao salvar doação'),
+        ),
+      );
+
+      print(e);
+    }
+  }
+
+  @override
+  void dispose() {
+    valorController.dispose();
+    super.dispose();
   }
 
   @override
@@ -62,12 +123,9 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
               size: 30,
             ),
             SizedBox(width: 10),
-
             Column(
-              crossAxisAlignment:
-              CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 Text(
                   "Faça uma doação",
                   style: TextStyle(
@@ -77,13 +135,10 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
                   ),
                 ),
               ],
-
-
             )
           ],
         ),
       ),
-
 
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -93,37 +148,58 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
 
             SizedBox(height: 25),
 
-            /// ONG
-            Text('Selecione a ONG',
-                style: TextStyle(fontWeight: FontWeight.w500)),
+            // ONG
+            Text(
+              'Selecione a ONG',
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+
             SizedBox(height: 10),
 
             _buildOpcao(
               titulo: 'ONG Exemplo 1',
-              valor: 'ong1',
+              valor: 'ONG Exemplo 1',
               grupo: ongSelecionada,
-              onChanged: (v) => setState(() => ongSelecionada = v),
+              onChanged: (v) {
+                setState(() {
+                  ongSelecionada = v;
+                });
+              },
             ),
+
             _buildOpcao(
               titulo: 'ONG Exemplo 2',
-              valor: 'ong2',
+              valor: 'ONG Exemplo 2',
               grupo: ongSelecionada,
-              onChanged: (v) => setState(() => ongSelecionada = v),
+              onChanged: (v) {
+                setState(() {
+                  ongSelecionada = v;
+                });
+              },
             ),
 
             SizedBox(height: 20),
 
-            /// Valor
-            Text('Valor a ser doado',
-                style: TextStyle(fontWeight: FontWeight.w500)),
+            // Valor
+            Text(
+              'Valor a ser doado',
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+
             SizedBox(height: 10),
 
             TextField(
               controller: valorController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                hintText: 'Ex.: R\$50,00',
-                contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                hintText: 'Ex.: 50,00',
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 12,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -132,28 +208,47 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
 
             SizedBox(height: 20),
 
-            /// Pagamento
-            Text('Forma de pagamento',
-                style: TextStyle(fontWeight: FontWeight.w500)),
+            // Forma de pagamento
+            Text(
+              'Forma de pagamento',
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+
             SizedBox(height: 10),
 
             _buildOpcao(
               titulo: 'PIX',
-              valor: 'pix',
+              valor: 'PIX',
               grupo: metodoPagamento,
-              onChanged: (v) => setState(() => metodoPagamento = v),
+              onChanged: (v) {
+                setState(() {
+                  metodoPagamento = v;
+                });
+              },
             ),
+
             _buildOpcao(
               titulo: 'Débito',
-              valor: 'debito',
+              valor: 'Débito',
               grupo: metodoPagamento,
-              onChanged: (v) => setState(() => metodoPagamento = v),
+              onChanged: (v) {
+                setState(() {
+                  metodoPagamento = v;
+                });
+              },
             ),
+
             _buildOpcao(
               titulo: 'Crédito',
-              valor: 'credito',
+              valor: 'Crédito',
               grupo: metodoPagamento,
-              onChanged: (v) => setState(() => metodoPagamento = v),
+              onChanged: (v) {
+                setState(() {
+                  metodoPagamento = v;
+                });
+              },
             ),
 
             Spacer(),
@@ -161,20 +256,21 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  print('ONG: $ongSelecionada');
-                  print('Valor: ${valorController.text}');
-                  print('Pagamento: $metodoPagamento');
-                },
+                onPressed: salvarDoacao,
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 14),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 14,
+                  ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius:
+                    BorderRadius.circular(10),
                   ),
                 ),
-                child: Text('Confirmar doação'),
+                child: Text(
+                  'Confirmar doação',
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),
