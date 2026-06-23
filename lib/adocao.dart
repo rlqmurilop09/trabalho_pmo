@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'db/propriedade_dao.dart';
+import 'db/adocao_dao.dart';
 import 'domain/propriedade.dart';
 
 
@@ -26,7 +26,7 @@ class _AdocaoState extends State<Adocao> {
 
   loadData() async {
     // Busca os dados no seu DAO
-    listaPropriedades = await PropriedadeDao().listarPropriedades();
+    listaPropriedades = await AdocaoDao().listarPropriedades();
     // Atualiza a tela para exibir os dados após o carregamento
     setState(() {
       var isLoading = false;

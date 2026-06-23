@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:projeto_pmo/domain/propriedade.dart";
-import 'package:projeto_pmo/db/propriedade_dao.dart';
+import 'package:projeto_pmo/db/adocao_dao.dart';
 import 'package:projeto_pmo/widget/container_adocao.dart';
 
 
@@ -23,10 +23,9 @@ class _AdocaoState extends State<Adocao> {
     loadData();
   }
   loadData() async {
-    listaPropriedades = await PropriedadeDao().listarPropriedades();
+    listaPropriedades = await AdocaoDao().listarPropriedades();
     setState(() {});
   }
-
 
   Widget build(BuildContext context) {
     return Scaffold(
