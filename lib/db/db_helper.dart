@@ -5,9 +5,9 @@ import 'package:sqflite/sqflite.dart';
 
 class DbHelper {
 
-  initDB() async {
+  Future<Database>initDB() async {
     String path = await getDatabasesPath();
-    String dbName = '/app.db';
+    String dbName = 'app.db';
 
     String dbPath = join(path, dbName);
 
@@ -30,7 +30,7 @@ class DbHelper {
     corFundo TEXT,
     titulo TEXT,
     descricao TEXT,
-    data TEXT,
+    data TEXT
     
     );
     ''';
@@ -38,15 +38,23 @@ class DbHelper {
     await db.execute(sql);
 
     sql =
-        "INSERT INTO AVISO (corIcone, corFundo, titulo, descricao, data) VALUES ('#FFFFFF', '#4CAF50', 'Vacinação', 'Leve seu pet para vacinar.', '20/06/2025');";
+        "INSERT INTO AVISO (corIcone, corFundo, titulo, descricao, data) VALUES ('#FFFFFF', '#4CAF50', 'Feira de Adoção', 'Venha conhecer e adotar bichinhos na Praça Ceci Cunha.', '20/06/2025');";
     await db.execute(sql);
 
     sql =
-        "INSERT INTO AVISO (corIcone, corFundo, titulo, descricao, data) VALUES ('#FFFFFF', '#2196F3', 'Consulta', 'Consulta veterinária agendada.', '22/06/2025');";
+        "INSERT INTO AVISO (corIcone, corFundo, titulo, descricao, data) VALUES ('#FFFFFF', '#2196F3', 'Campanha de Vacinação', 'Vacinação gratuita para cães e gatos.', '22/06/2025');";
     await db.execute(sql);
 
     sql =
-        "INSERT INTO AVISO (corIcone, corFundo, titulo, descricao, data) VALUES ('#FFFFFF', '#FF9800', 'Banho', 'Horário marcado para banho.', '25/06/2025');";
+    "INSERT INTO AVISO (corIcone, corFundo, titulo, descricao, data) VALUES ('#FFFFFF', '#FF9800', 'Multirão de Limpeza no Abrigo', 'Venha ser um voluntário.', '25/06/2025');";
+    await db.execute(sql);
+
+    sql =
+    "INSERT INTO AVISO (corIcone, corFundo, titulo, descricao, data) VALUES ('#FFFFFF', '#9D00FF', 'Arrecadação de Alimentos', 'Nossa ONG conta com sua colaboração.', '29/06/2025');";
+    await db.execute(sql);
+
+    sql =
+    "INSERT INTO AVISO (corIcone, corFundo, titulo, descricao, data) VALUES ('#FFFFFF', '#FF69B4', 'Feira de Adoção', 'Conheça o seu futuro bichinho!', '04/07/2025');";
     await db.execute(sql);
 
 
