@@ -23,6 +23,7 @@ class DbHelper {
 
   FutureOr<void> onCreateDB(Database db, int version) async {
 
+    //tabela murilo
     String sql = '''
       CREATE TABLE DOACAO (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,6 +33,47 @@ class DbHelper {
       );
     ''';
 
+    await db.execute(sql);
+
+    //tabela clara
+    sql = '''
+    CREATE TABLE AVISO (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    corIcone TEXT, 
+    corFundo TEXT,
+    titulo TEXT,
+    descricao TEXT,
+    data TEXT
+    
+    );
+    ''';
+
+    await db.execute(sql);
+
+    //tabela beatriz
+    sql = ''' CREATE TABLE PROPRIEDADE (
+           id INTEGER PRIMARY KEY AUTOINCREMENT,
+           urlImage TEXT,
+           nome TEXT,
+           idade TEXT,
+           genero TEXT,
+           especie TEXT,
+           porte TEXT,
+           raca TEXT,
+           vacinado TEXT,
+           castrado TEXT
+       );''';
+
+
+    await db.execute(sql);
+
+    //tabela jamylle
+    sql = ''' CREATE TABLE HISTORIA (
+    nome TEXT NOT NULL,
+            adotado TEXT NOT NULL,
+            historia TEXT NOT NULL,
+            urlImage TEXT NOT NULL
+        );''';
     await db.execute(sql);
 
     //db murilo
