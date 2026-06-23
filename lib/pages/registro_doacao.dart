@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_pmo/db/db_helper.dart';
+import 'package:projeto_pmo/db/doacao_dao.dart';
+import 'package:projeto_pmo/domain/doacao.dart';
+import 'package:projeto_pmo/widget/container_doacao.dart';
 
 class RegistroDoacao extends StatefulWidget {
+  const RegistroDoacao({super.key});
+
   @override
   State<RegistroDoacao> createState() => _RegistroDoacaoState();
 }
 
 class _RegistroDoacaoState extends State<RegistroDoacao> {
-  final DbHelper dbHelper = DbHelper();
 
-  List<Map<String, dynamic>> doacoes = [];
+  List<Doacao> listaDoacoes = [];
 
   @override
   void initState() {
     super.initState();
-    carregarDoacoes();
+    loadData();
   }
 
-  Future<void> carregarDoacoes() async {
-    List<Map<String, dynamic>> dados =
-    await dbHelper.listarDoacoes();
-
-    setState(() {
-      doacoes = dados;
-    });
+  loadData() async {
+    listaDoacoes = await DoacaoDao().listarDoacoes();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: Colors.white,
 
       appBar: AppBar(
@@ -42,63 +42,15 @@ class _RegistroDoacaoState extends State<RegistroDoacao> {
         ),
       ),
 
-      body: doacoes.isEmpty
-          ? const Center(
-        child: Text(
-          'Nenhuma doação registrada',
-          style: TextStyle(fontSize: 18),
-        ),
-      )
-          : RefreshIndicator(
-        onRefresh: carregarDoacoes,
-        child: ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: doacoes.length,
-          itemBuilder: (context, index) {
-            final doacao = doacoes[index];
+      body: ListView.builder(
+        itemCount: listaDoacoes.length,
+        itemBuilder: (context, i) {
 
-            return Card(
-              elevation: 3,
-              margin: const EdgeInsets.only(bottom: 12),
-              child: ListTile(
-                leading: const Icon(
-                  Icons.volunteer_activism,
-                  color: Colors.green,
-                ),
+          return ContainerDoacao(
+            doacao: listaDoacoes[i],
+          );
 
-                title: Text(
-                  doacao['ong'],
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-
-                subtitle: Column(
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 4),
-
-                    Text(
-                      'Valor: R\$ ${doacao['valor']}',
-                    ),
-
-                    Text(
-                      'Pagamento: ${doacao['metodoPagamento']}',
-                    ),
-                  ],
-                ),
-
-                trailing: Text(
-                  '#${doacao['id']}',
-                  style: const TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
+        },
       ),
     );
   }

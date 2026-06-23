@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_pmo/db/db_helper.dart';
+import 'package:projeto_pmo/db/doacao_dao.dart';
 
 class DoarDinheiro extends StatefulWidget {
+  const DoarDinheiro({super.key});
+
   @override
-  _DoarDinheiroState createState() => _DoarDinheiroState();
+  State<DoarDinheiro> createState() => _DoarDinheiroState();
 }
 
 class _DoarDinheiroState extends State<DoarDinheiro> {
   String? ongSelecionada;
   String? metodoPagamento;
 
-  TextEditingController valorController = TextEditingController();
+  final TextEditingController valorController = TextEditingController();
 
-  final DbHelper dbHelper = DbHelper();
+  final DoacaoDao doacaoDao = DoacaoDao();
 
   Widget _buildOpcao({
     required String titulo,
@@ -31,7 +33,7 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
           children: [
             Text(
               titulo,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
             Container(
               width: 22,
@@ -42,17 +44,16 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(6),
-                color:
-                selecionado ? Colors.blue : Colors.transparent,
+                color: selecionado ? Colors.blue : Colors.transparent,
               ),
               child: selecionado
-                  ? Icon(
+                  ? const Icon(
                 Icons.check,
                 size: 16,
                 color: Colors.white,
               )
                   : null,
-            )
+            ),
           ],
         ),
       ),
@@ -64,7 +65,7 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
         metodoPagamento == null ||
         valorController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Preencha todos os campos'),
         ),
       );
@@ -72,7 +73,7 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
     }
 
     try {
-      await dbHelper.inserirDoacao(
+      await doacaoDao.inserirDoacao(
         ong: ongSelecionada!,
         valor: double.parse(
           valorController.text.replaceAll(',', '.'),
@@ -81,7 +82,7 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
       );
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Doação registrada com sucesso!'),
         ),
       );
@@ -93,7 +94,7 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
       });
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Erro ao salvar doação'),
         ),
       );
@@ -114,28 +115,23 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
       backgroundColor: Colors.white,
 
       appBar: AppBar(
-        backgroundColor: Color(0xFF90CAF9),
+        backgroundColor: const Color(0xFF90CAF9),
         title: Row(
-          children: [
+          children: const [
             Icon(
               Icons.monetization_on,
               color: Color(0xFF0B42A8),
               size: 30,
             ),
             SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Faça uma doação",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF0B42A8),
-                  ),
-                ),
-              ],
-            )
+            Text(
+              "Faça uma doação",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF0B42A8),
+              ),
+            ),
           ],
         ),
       ),
@@ -146,17 +142,14 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
-            // ONG
-            Text(
+            const Text(
               'Selecione a ONG',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-              ),
+              style: TextStyle(fontWeight: FontWeight.w500),
             ),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             _buildOpcao(
               titulo: 'ONG Exemplo 1',
@@ -180,43 +173,34 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
               },
             ),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // Valor
-            Text(
+            const Text(
               'Valor a ser doado',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-              ),
+              style: TextStyle(fontWeight: FontWeight.w500),
             ),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             TextField(
               controller: valorController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: 'Ex.: 50,00',
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 12,
-                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
             ),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            // Forma de pagamento
-            Text(
+            const Text(
               'Forma de pagamento',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-              ),
+              style: TextStyle(fontWeight: FontWeight.w500),
             ),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             _buildOpcao(
               titulo: 'PIX',
@@ -251,24 +235,19 @@ class _DoarDinheiroState extends State<DoarDinheiro> {
               },
             ),
 
-            Spacer(),
+            const Spacer(),
 
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: salvarDoacao,
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 14,
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                    BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: Text(
-                  'Confirmar doação',
-                ),
+                child: const Text('Confirmar doação'),
               ),
             ),
           ],

@@ -6,8 +6,11 @@ import 'package:sqflite/sqflite.dart';
 class DbHelper {
 
   Future<Database> initDB() async {
+
     String path = await getDatabasesPath();
-    String dbPath = join(path, 'app.db');
+    String dbName = 'app.db';
+
+    String dbPath = join(path, dbName);
 
     Database db = await openDatabase(
       dbPath,
@@ -20,70 +23,32 @@ class DbHelper {
 
   FutureOr<void> onCreateDB(Database db, int version) async {
 
-    // Tabela de avisos
-    await db.execute('''
-      CREATE TABLE AVISO (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        corIcone TEXT,
-        corFundo TEXT,
-        titulo TEXT,
-        descricao TEXT,
-        data TEXT
-      );
-    ''');
-
-    // Tabela de doações
-    await db.execute('''
+    String sql = '''
       CREATE TABLE DOACAO (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         ong TEXT,
         valor REAL,
         metodoPagamento TEXT
       );
-    ''');
+    ''';
 
-    // Dados iniciais da tabela AVISO
-    await db.execute(
-        "INSERT INTO AVISO (corIcone, corFundo, titulo, descricao, data) VALUES ('#FFFFFF', '#4CAF50', 'Vacinação', 'Leve seu pet para vacinar.', '20/06/2025');"
-    );
+    await db.execute(sql);
 
-    await db.execute(
-        "INSERT INTO AVISO (corIcone, corFundo, titulo, descricao, data) VALUES ('#FFFFFF', '#2196F3', 'Consulta', 'Consulta veterinária agendada.', '22/06/2025');"
-    );
+    sql =
+    "INSERT INTO DOACAO (ong, valor, metodoPagamento) VALUES ('ONG Exemplo 1', 50.00, 'PIX');";
+    await db.execute(sql);
 
-    await db.execute(
-        "INSERT INTO AVISO (corIcone, corFundo, titulo, descricao, data) VALUES ('#FFFFFF', '#FF9800', 'Banho', 'Horário marcado para banho.', '25/06/2025');"
-    );
-  }
+    sql =
+    "INSERT INTO DOACAO (ong, valor, metodoPagamento) VALUES ('ONG Exemplo 2', 100.00, 'Crédito');";
+    await db.execute(sql);
 
-  // INSERIR DOAÇÃO
-  Future<int> inserirDoacao({
-    required String ong,
-    required double valor,
-    required String metodoPagamento,
-  }) async {
+    sql =
+    "INSERT INTO DOACAO (ong, valor, metodoPagamento) VALUES ('ONG Exemplo 1', 25.00, 'Débito');";
+    await db.execute(sql);
 
-    Database db = await initDB();
-
-    return await db.insert(
-      'DOACAO',
-      {
-        'ong': ong,
-        'valor': valor,
-        'metodoPagamento': metodoPagamento,
-      },
-    );
-  }
-
-  // LISTAR DOAÇÕES
-  Future<List<Map<String, dynamic>>> listarDoacoes() async {
-
-    Database db = await initDB();
-
-    return await db.query(
-      'DOACAO',
-      orderBy: 'id DESC',
-    );
+    sql =
+    "INSERT INTO DOACAO (ong, valor, metodoPagamento) VALUES ('ONG Exemplo 2', 75.00, 'PIX');";
+    await db.execute(sql);
   }
 
 }
