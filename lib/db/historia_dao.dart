@@ -16,5 +16,4 @@ class HistoriaDao {
     }
     return lista;
   }
-
   }
