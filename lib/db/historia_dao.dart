@@ -14,6 +14,8 @@ class HistoriaDao {
 
       lista.add(HistoriaAnimal.fromJson(json));
     }
+
+    await Future.delayed(Duration(seconds: 5));
     return lista;
   }
   }

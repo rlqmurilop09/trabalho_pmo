@@ -12,8 +12,8 @@ class Historias extends StatefulWidget {
 }
 
 class _HistoriasState extends State<Historias> {
-  List<HistoriaAnimal> listaHistorias = [];
-  bool carregando = true;
+  //List<HistoriaAnimal> listaHistorias = [];
+  late Future<Historia>> ListaHistoria;
 
   @override
   void initState() {
@@ -22,8 +22,7 @@ class _HistoriasState extends State<Historias> {
   }
 
   loadData() async {
-    listaHistorias = await HistoriaDao().listarHistorias();
-    await Future.delayed(const Duration(seconds: 2));
+    listaHistorias = HistoriaDao().listarHistorias();
     setState(() {
       carregando = false;
     });
@@ -32,30 +31,36 @@ class _HistoriasState extends State<Historias> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF90CAF9),
-        title: TextField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Icons.search),
-            suffixIcon: Icon(Icons.menu),
-            hintText: 'Pesquisar',
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
-          ),
-        ),
-      ),
-      backgroundColor: const Color(0xFFBBDEFD),
-
-      body: ListView.builder(
-        itemCount: listaHistorias.length,
-        itemBuilder: (context,i){
-          return ContainerHistoria(historia: listaHistorias[i]);
-        },
-
-      )
+        appBar: buildAppBar(),
+        body: buildListView()
     );
   }
 
-  Widget buildContainer({
+  buildAppBar() {
+    return AppBar(
+      backgroundColor: Color(0xFF90CAF9),
+      title: TextField(
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.search),
+          suffixIcon: Icon(Icons.menu),
+          hintText: 'Pesquisar',
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
+        ),
+      ),
+    );
+  }
+
+  ListView buildListView() {
+    return ListView.builder(
+      itemCount: listaHistorias.length,
+      itemBuilder: (context,i){
+        return ContainerHistoria(historia: listaHistorias[i]);
+      },
+
+    );
+  }
+
+   buildContainer({
     required String urlImage,
     required String nome,
     required String adotado,
