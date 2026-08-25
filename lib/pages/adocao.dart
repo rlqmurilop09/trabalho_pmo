@@ -29,16 +29,22 @@ class _AdocaoState extends State<Adocao> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Adoção"), backgroundColor: Color(0xFF8FB9E3)),
+      appBar: buildAppBar(),
       backgroundColor: Color(0xFFBBDEFB),
-      body: ListView.builder(
-        itemCount: listaPropriedades.length,
-        itemBuilder: (context, i) {
-          return ContainerAdocao(
-            propriedade: listaPropriedades[i],
-          );
-        },
-      ),
+      body: buildListView(),
+
+    );
+  }
+
+  AppBar buildAppBar() => AppBar(title: Text("Adoção"), backgroundColor: Color(0xFF8FB9E3));
+
+   buildListView() {
+    return ListView.builder(
+      itemCount: listaPropriedades.length,
+      itemBuilder: (context, i) {
+        return ContainerAdocao(propriedade: listaPropriedades[i]
+        );
+      },
     );
   }
 }
