@@ -7,42 +7,53 @@ import 'package:projeto_pmo/widget/container_adocao.dart';
 class Adocao extends StatefulWidget {
   const Adocao({super.key});
 
-
   @override
   State<Adocao> createState() => _AdocaoState();
 }
 
-
 class _AdocaoState extends State<Adocao> {
-  List<Propriedade> listaPropriedades = [];
-
+  // List<Propriedade> listaPropriedades = [];
+  late Future<List<Propriedade>> futureLista;
 
   @override
   void initState() {
     super.initState();
-    loadData();
+    futureLista = AdocaoDao().listarPropriedades();
   }
-  loadData() async {
-    listaPropriedades = await AdocaoDao().listarPropriedades();
-    setState(() {});
-  }
+  // loadData() async {
+  //  futureLista = AdocaoDao().listarPropriedades();
+  // setState(() {});
+ // }
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
       backgroundColor: Color(0xFFBBDEFB),
-      body: buildListView(),
+      body: FutureBuilder(
+          future: futureLista,
 
+          builder: (context, snapshot){
+
+            if (snapshot.hasData){
+              List<Propriedade> listarPropriedades = snapshot.requireData;
+              return buildListView(listarPropriedades);
+            }
+            return Center (child: CircularProgressIndicator());
+       },
+      )
     );
   }
 
-  AppBar buildAppBar() => AppBar(title: Text("Adoção"), backgroundColor: Color(0xFF8FB9E3));
+  buildAppBar() => AppBar(
+      title: Text("Adoção"),
+      backgroundColor: Color(0xFF8FB9E3)
+  );
 
-   buildListView() {
+   buildListView(List<Propriedade> listarPropriedades) {
     return ListView.builder(
-      itemCount: listaPropriedades.length,
+      itemCount: listarPropriedades.length,
       itemBuilder: (context, i) {
-        return ContainerAdocao(propriedade: listaPropriedades[i]
+        return ContainerAdocao(propriedade: listarPropriedades[i]
         );
       },
     );

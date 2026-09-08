@@ -3,19 +3,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'db/adocao_dao.dart';
 import 'domain/propriedade.dart';
 
-
-class Adocao extends StatefulWidget {
-  const Adocao({super.key});
-
+class AdocaoAntiga extends StatefulWidget {
+  const AdocaoAntiga({super.key});
 
   @override
-  State<Adocao> createState() => _AdocaoState();
+  State<AdocaoAntiga> createState() => _AdocaoState();
 }
 
-
-class _AdocaoState extends State<Adocao> {
+class _AdocaoState extends State<AdocaoAntiga> {
   List<Propriedade> listaPropriedades = [];
-
 
   @override
   void initState() {
@@ -23,19 +19,15 @@ class _AdocaoState extends State<Adocao> {
     loadData();
   }
 
-
   loadData() async {
     // Busca os dados no seu DAO
     listaPropriedades = await AdocaoDao().listarPropriedades();
-    // Atualiza a tela para exibir os dados após o carregamento
-    setState(() {
-      var isLoading = false;
-    });
+
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Adoção"), backgroundColor: Color(0xFF8FB9E3)),
-
 
       backgroundColor: Color(0xFFBBDEFB),
       //conteudo principal, elementos
@@ -43,7 +35,7 @@ class _AdocaoState extends State<Adocao> {
         children: [
           buildContainer(
             urlImage:
-            'https://static.todamateria.com.br/upload/sh/ut/shutterstock1411747946-cke.jpg',
+                'https://static.todamateria.com.br/upload/sh/ut/shutterstock1411747946-cke.jpg',
             nome: 'Mica',
             idade: 'Idade: 5 meses',
             genero: 'Gênero: Fêmea',
@@ -55,7 +47,7 @@ class _AdocaoState extends State<Adocao> {
           ),
           buildContainer(
             urlImage:
-            'https://i.pinimg.com/736x/e1/f8/f0/e1f8f02350b47bc169feb4664329a898.jpg',
+                'https://i.pinimg.com/736x/e1/f8/f0/e1f8f02350b47bc169feb4664329a898.jpg',
             nome: 'Lina',
             idade: 'Idade: 2 anos',
             genero: 'Gênero: Fêmea',
@@ -67,7 +59,7 @@ class _AdocaoState extends State<Adocao> {
           ),
           buildContainer(
             urlImage:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPyw5XkJrzCGPFjK_btUeBLGk2cWAtpmWFHg&s',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPyw5XkJrzCGPFjK_btUeBLGk2cWAtpmWFHg&s',
             nome: 'Hector',
             idade: 'Idade: 3 anos',
             genero: 'Gênero: Macho',
@@ -79,7 +71,7 @@ class _AdocaoState extends State<Adocao> {
           ),
           buildContainer(
             urlImage:
-            'https://odia.ig.com.br/_midias/jpg/2024/05/22/passaros_domesticos-32914698.jpg',
+                'https://odia.ig.com.br/_midias/jpg/2024/05/22/passaros_domesticos-32914698.jpg',
             nome: 'Pepita',
             idade: '1 anos',
             genero: 'Femea',
@@ -94,9 +86,6 @@ class _AdocaoState extends State<Adocao> {
     );
   }
 
-
-
-
   buildContainer({
     required String urlImage,
     required String nome,
@@ -108,10 +97,6 @@ class _AdocaoState extends State<Adocao> {
     required String vacinado,
     required String castrado,
   }) {
-
-
-
-
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.all(16),
@@ -130,8 +115,6 @@ class _AdocaoState extends State<Adocao> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
-
           SizedBox(height: 4),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -164,44 +147,31 @@ class _AdocaoState extends State<Adocao> {
     );
   }
 
-
-  pin({required String vacina, required String castrado}){
+  pin({required String vacina, required String castrado}) {
     return Row(
       children: [
         Container(
           width: 70,
           height: 25,
           decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.circular(16)
+            color: Colors.green,
+            borderRadius: BorderRadius.circular(16),
           ),
 
-
-          child: Center(
-            child: Text(vacina,style: TextStyle(
-                fontSize: 13
-            )),
-          ),
+          child: Center(child: Text(vacina, style: TextStyle(fontSize: 13))),
         ),
-
 
         Container(
           width: 70,
           height: 25,
           decoration: BoxDecoration(
-              color: Colors.lightBlueAccent,
-              borderRadius: BorderRadius.circular(16)
+            color: Colors.lightBlueAccent,
+            borderRadius: BorderRadius.circular(16),
           ),
 
-
-          child: Center(
-            child: Text(castrado,style: TextStyle(
-                fontSize: 13
-            )),
-          ),
+          child: Center(child: Text(castrado, style: TextStyle(fontSize: 13))),
         ),
       ],
     );
   }
 }
-
