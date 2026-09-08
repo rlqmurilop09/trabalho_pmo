@@ -13,26 +13,30 @@ class Historias extends StatefulWidget {
 
 class _HistoriasState extends State<Historias> {
   //List<HistoriaAnimal> listaHistorias = [];
-  late Future<Historia>> ListaHistoria;
+  late Future<List<HistoriaAnimal>> futureLista;
 
   @override
   void initState() {
     super.initState();
-    loadData();
-  }
-
-  loadData() async {
-    listaHistorias = HistoriaDao().listarHistorias();
-    setState(() {
-      carregando = false;
-    });
+    futureLista = HistoriaDao().listarHistorias();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: buildAppBar(),
-        body: buildListView()
+        body: FutureBuilder(
+          future: futureLista,
+              builder: (context, snapshot){
+
+              if(snapshot.hasData){
+               List<HistoriaAnimal> listaHistorias = snapshot.requireData;
+                return buildListView(listaHistorias);
+              }
+
+              return Center(child: CircularProgressIndicator ());
+            },
+        ),
     );
   }
 
@@ -50,11 +54,16 @@ class _HistoriasState extends State<Historias> {
     );
   }
 
-  ListView buildListView() {
+  buildListView(List<HistoriaAnimal> listaHistorias){
     return ListView.builder(
+      //tamanho da lista - numeros de repeticoes
       itemCount: listaHistorias.length,
+      //repetir
       itemBuilder: (context,i){
-        return ContainerHistoria(historia: listaHistorias[i]);
+        //chamando novo widget
+        return ContainerHistoria(
+            historia: listaHistorias[i],
+        );
       },
 
     );
