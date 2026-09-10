@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_pmo/pages/homepage.dart';
+import 'package:projeto_pmo/db/shared_prefs.dart';
+import 'package:projeto_pmo/db/user_dao.dart';
+import 'package:projeto_pmo/pages/cadastro_page.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -60,7 +63,16 @@ class _LoginPageState extends State<LoginPage> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return CadastroPage();
+                      },
+                    ),
+                  );
+                },
                 child: Text(
                   'Cadastro Usuário',
                   style: TextStyle(
@@ -95,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
 
       prefs.setUserStatus(true);
     } else {
-      print('User e/ou password incorretos';)
+      print('User e/ou password incorretos');
      }
     }
 

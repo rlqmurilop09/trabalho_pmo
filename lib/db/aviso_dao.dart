@@ -16,6 +16,7 @@ class AvisoDao {
 
       listaAvisos.add(aviso);
     }
+    
 
     return listaAvisos;
   }

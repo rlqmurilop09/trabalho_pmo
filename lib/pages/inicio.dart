@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_pmo/db/aviso_dao.dart';
+import 'package:projeto_pmo/db/shared_prefs.dart';
+import 'package:projeto_pmo/pages/login_page.dart';
+import 'package:projeto_pmo/domain/aviso.dart';
 
 class Inicio extends StatefulWidget {
   const Inicio({super.key});
@@ -8,10 +12,19 @@ class Inicio extends StatefulWidget {
 }
 
 class _InicioState extends State<Inicio> {
+  SharedPrefs prefs = SharedPrefs();
+  late Future<List<Aviso>> futureLista;
+
+  @override
+  void initState(){
+    super.initState();
+    futureLista = AvisoDao().listarAvisos();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: buildActions(),
         backgroundColor: Color(0xFF90CAF9),
       title: Row(
         children: [
@@ -221,4 +234,24 @@ class _InicioState extends State<Inicio> {
 
 
   }
+
+   buildActions() {
+    return [
+      IconButton(
+          onPressed: () {
+            prefs.setUserStatus(false);
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder:(context){
+                      return LoginPage();
+                    },
+                ),
+            );
+          },
+
+          icon: Icon(Icons.logout),
+      ),
+    ];
+   }
 }
