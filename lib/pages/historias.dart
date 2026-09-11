@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:projeto_pmo/api/historias_api.dart';
 import 'package:projeto_pmo/domain/historia_animal.dart';
 import 'package:projeto_pmo/widget/container_historia.dart';
+import 'package:projeto_pmo/api/cachorro_api.dart';
 
 class Historias extends StatefulWidget {
   const Historias({super.key});
@@ -17,7 +19,6 @@ class _HistoriasState extends State<Historias> {
   @override
   void initState() {
     super.initState();
-
     futureLista = HistoriasApi().listarHistorias();
   }
 
