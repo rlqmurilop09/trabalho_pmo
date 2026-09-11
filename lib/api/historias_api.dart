@@ -5,7 +5,7 @@ import 'package:dio/dio';
    final dio = Dio();
 
    final barseUrl =
-       'https://my-json-server.typicode.com/projeto_pmo/';
+       'https://my-json-server.typicode.com/jsss2-star/historia_animais-api/animais';
 
    Future<List<HistoriaAnimal>> listaHistorias() async{
      final response = await dio.get('$baseUrl/historias');
