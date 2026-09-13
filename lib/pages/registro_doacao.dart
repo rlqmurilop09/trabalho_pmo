@@ -12,18 +12,19 @@ class RegistroDoacao extends StatefulWidget {
 
 class _RegistroDoacaoState extends State<RegistroDoacao> {
 
-  List<Doacao> listaDoacoes = [];
+  //List<Doacao> listaDoacoes = [];
+  late Future<List<Doacao>> futurelistaDoacoes;
 
   @override
   void initState() {
     super.initState();
-    loadData();
+    futurelistaDoacoes = DoacaoDao().listarDoacoes();
   }
 
-  loadData() async {
-    listaDoacoes = await DoacaoDao().listarDoacoes();
-    setState(() {});
-  }
+  //loadData() async {
+  //
+  // setState(() {});
+  //}
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +32,45 @@ class _RegistroDoacaoState extends State<RegistroDoacao> {
 
       backgroundColor: Colors.white,
 
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF90CAF9),
-        title: const Text(
-          'Registro de Doações',
-          style: TextStyle(
-            color: Color(0xFF0B42A8),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      appBar: buildAppBar(),
 
-      body: ListView.builder(
-        itemCount: listaDoacoes.length,
-        itemBuilder: (context, i) {
+      body: FutureBuilder(
+        future: futurelistaDoacoes,
+        builder: (context, snapshot) {
+          if(snapshot.hasData){
+            List<Doacao> listaDoacoes = snapshot.requireData;
+            return buildListView(listaDoacoes);
+          }
 
-          return ContainerDoacao(
-            doacao: listaDoacoes[i],
-          );
-
+          return Center(child: CircularProgressIndicator());
         },
       ),
+    );
+  }
+
+  buildAppBar() {
+    return AppBar(
+      backgroundColor: const Color(0xFF90CAF9),
+      title: const Text(
+        'Registro de Doações',
+        style: TextStyle(
+          color: Color(0xFF0B42A8),
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  buildListView(List<Doacao> listaDoacoes) {
+    return ListView.builder(
+      itemCount: listaDoacoes.length,
+      itemBuilder: (context, i) {
+
+        return ContainerDoacao(
+          doacao: listaDoacoes[i],
+        );
+
+      },
     );
   }
 }
