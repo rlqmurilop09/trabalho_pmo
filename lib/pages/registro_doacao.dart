@@ -19,6 +19,7 @@ class _RegistroDoacaoState extends State<RegistroDoacao> {
   @override
   void initState() {
     super.initState();
+    //futurelistaDoacoes = DoacaoDao().listarDoacoes();
     futurelistaDoacoes = ApiDoacao().listarDoacoes();
     
     ApiLink().findByLink('');
