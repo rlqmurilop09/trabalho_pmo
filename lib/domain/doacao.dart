@@ -15,7 +15,7 @@ class Doacao {
     return Doacao(
       id: json['id'],
       ong: json['ong'],
-      valor: json['valor'],
+      valor: (json['valor'] as num).toDouble(),
       metodoPagamento: json['metodoPagamento'],
     );
   }
