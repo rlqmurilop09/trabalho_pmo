@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_pmo/api/api_link.dart';
 import 'package:projeto_pmo/db/doacao_dao.dart';
 import 'package:projeto_pmo/domain/doacao.dart';
 import 'package:projeto_pmo/widget/container_doacao.dart';
@@ -12,19 +13,15 @@ class RegistroDoacao extends StatefulWidget {
 
 class _RegistroDoacaoState extends State<RegistroDoacao> {
 
-  //List<Doacao> listaDoacoes = [];
   late Future<List<Doacao>> futurelistaDoacoes;
 
   @override
   void initState() {
     super.initState();
     futurelistaDoacoes = DoacaoDao().listarDoacoes();
+    
+    ApiLink().findByLink('');
   }
-
-  //loadData() async {
-  //
-  // setState(() {});
-  //}
 
   @override
   Widget build(BuildContext context) {
