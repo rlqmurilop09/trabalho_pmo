@@ -118,7 +118,5 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
       ],
     );
   }
-
-
 }
 

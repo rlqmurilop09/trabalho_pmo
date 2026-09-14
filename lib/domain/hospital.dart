@@ -25,16 +25,18 @@ class Hospital {
 
   factory Hospital.fromJson(Map<String, dynamic> json) {
     return Hospital(
-      id: json['id'],
-      stateCode: json['state_code'],
-      city: json['city'],
-      name: json['name'],
-      address: json['address'],
-      phones: json['phones'],
-      cnes: json['cnes'],
-      treatments: List<String>.from(json['treatments']),
-      lat: json['lat'],
-      lng: json['lng'],
+      id: json['id'] ?? 0,
+      stateCode: json['state_code'] ?? '',
+      city: json['city'] ?? '',
+      name: json['name'] ?? '',
+      address: json['address'] ?? '',
+      phones: json['phones']?.toString() ?? '',
+      cnes: json['cnes']?.toString() ?? '',
+      treatments: json['treatments'] != null
+          ? List<String>.from(json['treatments'])
+          : [],
+      lat: double.tryParse(json['lat']?.toString() ?? '') ?? 0.0,
+      lng: double.tryParse(json['lng']?.toString() ?? '') ?? 0.0,
     );
   }
 }

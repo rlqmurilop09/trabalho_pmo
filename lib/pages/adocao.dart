@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import "package:projeto_pmo/domain/propriedade.dart";
 import 'package:projeto_pmo/db/adocao_dao.dart';
 import 'package:projeto_pmo/widget/container_adocao.dart';
-
+import 'package:projeto_pmo/pages/hospitaiste.dart';
 
 class Adocao extends StatefulWidget {
   const Adocao({super.key});
@@ -31,7 +31,6 @@ class _AdocaoState extends State<Adocao> {
       backgroundColor: Color(0xFFBBDEFB),
       body: FutureBuilder(
           future: futureLista,
-
           builder: (context, snapshot){
 
             if (snapshot.hasData){
@@ -46,7 +45,18 @@ class _AdocaoState extends State<Adocao> {
 
   buildAppBar() => AppBar(
       title: Text("Adoção"),
-      backgroundColor: Color(0xFF8FB9E3)
+      backgroundColor: Color(0xFF8FB9E3),
+    actions: [
+      IconButton(
+        icon: Icon(Icons.local_hospital),
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => const Hospitais(),
+          ),
+          );
+        },
+      ),
+    ],
   );
 
    buildListView(List<Propriedade> listarPropriedades) {
