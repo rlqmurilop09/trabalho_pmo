@@ -3,6 +3,8 @@ import 'package:projeto_pmo/db/user_dao.dart';
 import 'package:projeto_pmo/pages/homepage.dart';
 import 'package:projeto_pmo/pages/cadastro_page.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_pmo/api/user_api.dart';
+import 'package:projeto_pmo/domain/user.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -130,16 +132,24 @@ class _LoginPageState extends State<LoginPage> {
     String username = userController.text;
     String password = passwordController.text;
 
-    bool isAuth = await UserDao().login(username, password);
+    List<User> listarUsers = await UserApi().listarUsers();
+
+    bool isAuth = false;
+
+    for (User user in listarUsers) {
+      if (user.username == username && user.password == password) {
+        isAuth = true;
+      }
+    }
 
     if (isAuth) {
       Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return HomePage();
-          },
-        ),
+          context,
+          MaterialPageRoute(
+              builder: (context) {
+                return HomePage();
+              },
+              ),
       );
 
       prefs.setUserStatus(true);
@@ -148,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
         mensagem = 'Usuário e/ou senha incorretos';
       });
     }
-  }
+}
 
   buildPasswordOutlineInputBorder() {
     return OutlineInputBorder(
