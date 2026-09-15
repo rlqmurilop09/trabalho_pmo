@@ -1,19 +1,22 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:projeto_pmo/domain/propriedade.dart";
-
+import "package:projeto_pmo/domain/procedimento.dart";
+import "package:projeto_pmo/widget/container_tuss.dart";
 
 class ContainerAdocao extends StatefulWidget {
   Propriedade propriedade;
+  Procedimento procedimento;
 
-
-  ContainerAdocao({super.key, required this.propriedade});
-
+  ContainerAdocao({
+    super.key,
+    required this.propriedade,
+    required this.procedimento,
+  });
 
   @override
   State<ContainerAdocao> createState() => _ContainerAdocaoState();
 }
-
 
 class _ContainerAdocaoState extends State<ContainerAdocao> {
   @override
@@ -45,8 +48,6 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
               fit: BoxFit.cover,
             ),
           ),
-
-
           const SizedBox(height: 4),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,49 +75,40 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
           Text(widget.propriedade.raca),
           SizedBox(height: 8),
           pin(vacina: widget.propriedade.vacinado, castrado: widget.propriedade.castrado),
+
+          // aqui entra o TUSS
+          ContainerTuss(procedimento: widget.procedimento),
         ],
       ),
     );
   }
 
-
-  pin({required String vacina, required String castrado}){
+  pin({required String vacina, required String castrado}) {
     return Row(
       children: [
         Container(
           width: 70,
           height: 25,
           decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.circular(16)
+            color: Colors.green,
+            borderRadius: BorderRadius.circular(16),
           ),
-
-
           child: Center(
-            child: Text(vacina,style: TextStyle(
-                fontSize: 13
-            )),
+            child: Text(vacina, style: TextStyle(fontSize: 13)),
           ),
         ),
-
-
         Container(
           width: 70,
           height: 25,
           decoration: BoxDecoration(
-              color: Colors.lightBlueAccent,
-              borderRadius: BorderRadius.circular(16)
+            color: Colors.lightBlueAccent,
+            borderRadius: BorderRadius.circular(16),
           ),
-
-
           child: Center(
-            child: Text(castrado,style: TextStyle(
-                fontSize: 13
-            )),
+            child: Text(castrado, style: TextStyle(fontSize: 13)),
           ),
         ),
       ],
     );
   }
 }
-
