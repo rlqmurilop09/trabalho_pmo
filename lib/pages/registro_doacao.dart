@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_pmo/api/api_link.dart';
 import 'package:projeto_pmo/api/api_doacao.dart';
-import 'package:projeto_pmo/db/doacao_dao.dart';
 import 'package:projeto_pmo/domain/doacao.dart';
+import 'package:projeto_pmo/domain/Dominio.dart';
 import 'package:projeto_pmo/widget/container_doacao.dart';
 
 class RegistroDoacao extends StatefulWidget {
@@ -16,12 +16,16 @@ class _RegistroDoacaoState extends State<RegistroDoacao> {
 
   late Future<List<Doacao>> futurelistaDoacoes;
 
+  TextEditingController resultadoController = TextEditingController();
+  TextEditingController linkController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
+
     //futurelistaDoacoes = DoacaoDao().listarDoacoes();
     futurelistaDoacoes = ApiDoacao().listarDoacoes();
-    
+
     ApiLink().findByLink('');
   }
 
@@ -33,16 +37,47 @@ class _RegistroDoacaoState extends State<RegistroDoacao> {
 
       appBar: buildAppBar(),
 
-      body: FutureBuilder(
-        future: futurelistaDoacoes,
-        builder: (context, snapshot) {
-          if(snapshot.hasData){
-            List<Doacao> listaDoacoes = snapshot.requireData;
-            return buildListView(listaDoacoes);
-          }
+      body: Column(
+        children: [
 
-          return Center(child: CircularProgressIndicator());
-        },
+          TextField(
+            controller: linkController,
+            decoration: InputDecoration(
+              suffixIcon: IconButton(
+                onPressed: onPressedFindByLink,
+                icon: Icon(Icons.search),
+              ),
+              hintText: 'Domínio',
+            ),
+          ),
+
+          TextField(
+            controller: resultadoController,
+            decoration: InputDecoration(
+              hintText: 'Status',
+            ),
+          ),
+
+          Expanded(
+            child: FutureBuilder(
+              future: futurelistaDoacoes,
+              builder: (context, snapshot) {
+
+                if(snapshot.hasData){
+
+                  List<Doacao> listaDoacoes = snapshot.requireData;
+
+                  return buildListView(listaDoacoes);
+
+                }
+
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -71,5 +106,14 @@ class _RegistroDoacaoState extends State<RegistroDoacao> {
 
       },
     );
+  }
+
+  Future<void> onPressedFindByLink() async {
+
+    String link = linkController.text;
+
+    Dominio dominio = await ApiLink().findByLink(link);
+
+    resultadoController.text = dominio.status;
   }
 }
