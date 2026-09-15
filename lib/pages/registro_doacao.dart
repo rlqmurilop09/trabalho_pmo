@@ -53,6 +53,7 @@ class _RegistroDoacaoState extends State<RegistroDoacao> {
 
           TextField(
             controller: resultadoController,
+            readOnly: true,
             decoration: InputDecoration(
               hintText: 'Status',
             ),
