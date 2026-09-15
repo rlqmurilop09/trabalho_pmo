@@ -42,6 +42,7 @@ dependencies:
   sqflite:
   path:
   shared_preferences:
+  dio:
 
 
 

@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:projeto_pmo/pages/homepage.dart';
 import 'package:projeto_pmo/db/shared_prefs.dart';
 import 'package:projeto_pmo/db/user_dao.dart';
+import 'package:projeto_pmo/pages/homepage.dart';
 import 'package:projeto_pmo/pages/cadastro_page.dart';
-
+import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,38 +13,48 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   SharedPrefs prefs = SharedPrefs();
+
   TextEditingController userController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  String mensagem = '';
 
   @override
   void initState() {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-          body: Padding(
-              padding: const EdgeInsets.all(32),
+      child: Scaffold(
+        backgroundColor: Color(0xFF90CAF9),
+        body: Padding(
+          padding: const EdgeInsets.all(32),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
                 'Entre ou cadastre-se',
-                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: Color(0xFF0B42A8),
+                  fontSize: 21,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
+
               SizedBox(height: 24),
+
               TextField(
                 controller: userController,
                 decoration: InputDecoration(
                   hintText: 'Usuário',
                   focusedBorder: buildUserOutlineInputBorder(),
-                  border: buildPasswordOutlineInputBorder(),
+                  border: buildUserOutlineInputBorder(),
+                ),
               ),
-              ),
+
               TextField(
                 controller: passwordController,
                 obscureText: true,
@@ -55,10 +64,38 @@ class _LoginPageState extends State<LoginPage> {
                   border: buildPasswordOutlineInputBorder(),
                 ),
               ),
+
               SizedBox(height: 24),
+
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFF0B42A8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                onPressed: onPressed,
+                child: Text(
+                  'Entrar',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+
+              Text(
+                mensagem,
+                style: TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -74,22 +111,22 @@ class _LoginPageState extends State<LoginPage> {
                   );
                 },
                 child: Text(
-                  'Cadastro Usuário',
+                  'Cadastrar Usuário',
                   style: TextStyle(
-                    color: Color(0xFF90CAF9),
+                    color: Color(0xFF0B42A8),
                     fontWeight: FontWeight.w600,
-                    fontSize: 16,                  ),
+                    fontSize: 16,
+                  ),
                 ),
-
               ),
-             ],
-            ),
-          )
+            ],
+          ),
         ),
-      );
-    }
+      ),
+    );
+  }
 
-    onPressed() async {
+  onPressed() async {
     String username = userController.text;
     String password = passwordController.text;
 
@@ -107,23 +144,27 @@ class _LoginPageState extends State<LoginPage> {
 
       prefs.setUserStatus(true);
     } else {
-      print('User e/ou password incorretos');
-     }
+      setState(() {
+        mensagem = 'Usuário e/ou senha incorretos';
+      });
     }
+  }
 
-    buildPasswordOutlineInputBorder() {
+  buildPasswordOutlineInputBorder() {
     return OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.grey),
-      borderRadius: BorderRadius.vertical(bottom: Radius.circular(8)),
+      borderSide: BorderSide(color: Color(0xFF0B42A8)),
+      borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(8),
+      ),
     );
   }
 
-
-
-    buildUserOutlineInputBorder() {
+  buildUserOutlineInputBorder() {
     return OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.grey),
-      borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
+      borderSide: BorderSide(color: Color(0xFF0B42A8)),
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(8),
+      ),
     );
   }
 }

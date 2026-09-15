@@ -48,7 +48,7 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       backgroundColor: Color(0xFF0B42A8),
       body: Center(
-        child: Icon(Icons.pets, color: Color(0xFF90CAF9),
+        child: Icon(Icons.pets, color: Color(0xFF90CAF9), size: 50,
         ),
       ),
     );

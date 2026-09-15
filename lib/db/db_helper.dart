@@ -7,7 +7,7 @@ class DbHelper {
 
   Future<Database>initDB() async {
     String path = await getDatabasesPath();
-    String dbName = 'app-1.db';
+    String dbName = 'app-2.db';
 
     String dbPath = join(path, dbName);
 
@@ -68,6 +68,18 @@ class DbHelper {
     await db.execute(sql);
 
     sql = "INSERT INTO USER (username, password) VALUES ('joao@gmail.com', '123456');";
+    await db.execute(sql);
+
+
+    sql = "INSERT INTO USER (username, password) VALUES ('mariaclara@gmail.com', '123456');";
+    await db.execute(sql);
+
+
+    sql = "INSERT INTO USER (username, password) VALUES ('murilo@gmail.com', '123456');";
+    await db.execute(sql);
+
+
+    sql = "INSERT INTO USER (username, password) VALUES ('cristiane@gmail.com', '123456');";
     await db.execute(sql);
 
   }
