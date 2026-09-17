@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_pmo/db/db_helper.dart';
-import 'package:projeto_pmo/domain/propriedade.dart';
 import 'package:projeto_pmo/db/adocao_dao.dart';
+import 'package:projeto_pmo/domain/propriedade.dart';
 import 'package:projeto_pmo/widget/container_adocao.dart';
-import 'package:projeto_pmo/widget/container_tuss.dart';
-import 'package:projeto_pmo/api/tuss_api.dart';
-import 'package:projeto_pmo/domain/procedimento.dart';
+import 'package:projeto_pmo/api/dog_api.dart';
 
 class Adocao extends StatefulWidget {
   const Adocao({super.key});
@@ -16,16 +13,20 @@ class Adocao extends StatefulWidget {
 
 class _AdocaoState extends State<Adocao> {
 
-  late Future<List<dynamic>> futureCombinado;
+  late Future<List<dynamic>> futureDados;
 
   @override
   void initState() {
     super.initState();
 
-    futureCombinado = Future.wait([
-      AdocaoDao().listarPropriedades(),
-      TussApi().listarProcedimentos(),
-    ]);
+    futureDados = carregarDados();
+  }
+
+  Future<List<dynamic>> carregarDados() async{
+    List<Propriedade> propriedades = await AdocaoDao().listarPropriedades();
+    List<String> imagens = await DogApi(). buscarImagens(propriedades.length);
+
+    return[propriedades, imagens];
   }
 
   @override
@@ -33,9 +34,12 @@ class _AdocaoState extends State<Adocao> {
     return Scaffold(
       appBar: buildAppBar(),
       backgroundColor: const Color(0xFFBBDEFB),
+
       body: FutureBuilder<List<dynamic>>(
-        future: futureCombinado,
+        future: futureDados,
+
         builder: (context, snapshot) {
+
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -52,14 +56,18 @@ class _AdocaoState extends State<Adocao> {
           }
 
           if (snapshot.hasData) {
-            List<Propriedade> listarPropriedades =
-            (snapshot.requireData[0] as List).cast<Propriedade>();
-            List<Procedimento> listarProcedimentos =
-            (snapshot.requireData[1] as List).cast<Procedimento>();
-            if (listarPropriedades.isEmpty)
-            return buildListView(listarPropriedades, listarProcedimentos);
+
+            List<Propriedade> listarPropriedades = snapshot.data![0] as List<Propriedade>;
+
+            List<String> imagensApi = snapshot.data![1] as List<String>;
+            if (listarPropriedades.isNotEmpty) {
+              return buildListView(
+                  listarPropriedades, imagensApi);
+            }
           }
-          return const Center(child: Text('Nenhum animal encontrado.')
+
+          return const Center(
+            child: Text('Nenhum animal encontrado.'),
           );
         },
       ),
@@ -71,13 +79,14 @@ class _AdocaoState extends State<Adocao> {
     backgroundColor: const Color(0xFF8FB9E3),
   );
 
-  buildListView(List<Propriedade> listarPropriedades, List<Procedimento> listarProcedimentos) {
+  buildListView(List<Propriedade> listarPropriedades, List<String> imagemApi) {
     return ListView.builder(
       itemCount: listarPropriedades.length,
+
       itemBuilder: (context, i) {
         return ContainerAdocao(
           propriedade: listarPropriedades[i],
-          procedimento: listarProcedimentos[i],
+          imagemApi: imagemApi[i],
         );
       },
     );
