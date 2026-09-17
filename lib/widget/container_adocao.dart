@@ -51,10 +51,7 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
 
-
         children: [
-
-
           // IMAGEM DO BANCO DE DADOS
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
@@ -69,19 +66,13 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
 
           const SizedBox(height: 4),
 
-
           // NOME E ONG
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-
             children: [
-
 
               Text(
                 widget.propriedade.nome,
-
-
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -92,8 +83,6 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
               Row(
                 children: [
                   Text('ONG: Patinha feliz '),
-
-
                   Icon(
                     Icons.pets,
                     size: 20,
@@ -106,7 +95,6 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
 
           SizedBox(height: 2),
 
-
           // INFORMAÇÕES DO ANIMAL
           Text(widget.propriedade.genero),
           Text(widget.propriedade.idade),
@@ -114,9 +102,7 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
           Text(widget.propriedade.porte),
           Text(widget.propriedade.raca),
 
-
           SizedBox(height: 8),
-
 
           // VACINADO E CASTRADO
           pin(
@@ -127,38 +113,31 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
 
           SizedBox(height: 16),
 
-
           const Padding(
             padding: EdgeInsets.only(
               top: 8,
               bottom: 8,
             ),
             child: Text(
-              'Perdidos',
+              'Galeria de cães',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
 
 
-          // IMAGEM DA API DOG CEO
+          // IMAGEM DA API
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-
-
             child: Image.network(
               widget.imagemApi,
               width: double.infinity,
-              height: 180,
+              height: 200,
               fit: BoxFit.cover,
             ),
           ),
-
-
-
-
         ],
       ),
     );
@@ -169,52 +148,34 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
     required String vacina,
     required String castrado,
   }) {
-
-
     return Row(
       children: [
-
-
         Container(
           width: 70,
           height: 25,
-
-
           decoration: BoxDecoration(
             color: Colors.green,
             borderRadius: BorderRadius.circular(16),
           ),
-
-
           child: Center(
             child: Text(
               vacina,
-
-
               style: TextStyle(
                 fontSize: 13,
               ),
             ),
           ),
         ),
-
-
         Container(
           width: 70,
           height: 25,
-
-
           decoration: BoxDecoration(
             color: Colors.lightBlueAccent,
             borderRadius: BorderRadius.circular(16),
           ),
-
-
           child: Center(
             child: Text(
               castrado,
-
-
               style: TextStyle(
                 fontSize: 13,
               ),
