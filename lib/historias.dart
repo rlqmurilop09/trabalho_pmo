@@ -1,112 +1,253 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:projeto_pmo/db/historia_dao.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:projeto_pmo/api/historias_api.dart';
+import 'package:projeto_pmo/api/adocao_api.dart';
 import 'package:projeto_pmo/domain/historia_animal.dart';
+import 'package:projeto_pmo/domain/pet_adocao.dart';
 import 'package:projeto_pmo/widget/container_historia.dart';
 
 class Historias extends StatefulWidget {
   const Historias({super.key});
 
   @override
-  State<Historias> createState() => _HistoriasState();
+  State<Historias> createState() {
+    return _HistoriasState();
+  }
 }
 
 class _HistoriasState extends State<Historias> {
-  //List<HistoriaAnimal> listaHistorias = [];
   late Future<List<HistoriaAnimal>> futureLista;
+  late Future<List<PetAdocao>> futurePets;
 
   @override
   void initState() {
     super.initState();
-    futureLista = HistoriaDao().listarHistorias();
+
+    futureLista = HistoriasApi().listarHistorias();
+    futurePets = AdocaoApi().listarPets();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildAppBar(),
-        body: FutureBuilder(
-          future: futureLista,
-              builder: (context, snapshot){
-
-              if(snapshot.hasData){
-               List<HistoriaAnimal> listaHistorias = snapshot.requireData;
-                return buildListView(listaHistorias);
-              }
-
-              return Center(child: CircularProgressIndicator ());
-            },
-        ),
-    );
-  }
-
-  buildAppBar() {
-    return AppBar(
-      backgroundColor: Color(0xFF90CAF9),
-      title: TextField(
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.search),
-          suffixIcon: Icon(Icons.menu),
-          hintText: 'Pesquisar',
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32)),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF90CAF9),
+        title: const Text('Histórias dos animais'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            buildPetsAdocao(),
+            buildHistorias(),
+          ],
         ),
       ),
     );
   }
 
-  buildListView(List<HistoriaAnimal> listaHistorias){
-    return ListView.builder(
-      //tamanho da lista - numeros de repeticoes
-      itemCount: listaHistorias.length,
-      //repetir
-      itemBuilder: (context,i){
-        //chamando novo widget
-        return ContainerHistoria(
-            historia: listaHistorias[i],
-        );
-      },
+  Widget buildPetsAdocao() {
+    return FutureBuilder<List<PetAdocao>>(
+      future: futurePets,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Padding(
+            padding: EdgeInsets.all(20),
+            child: CircularProgressIndicator(),
+          );
+        }
 
-    );
-  }
+        if (snapshot.hasError) {
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: Text(
+              'Erro ao carregar animais para adoção: ${snapshot.error}',
+            ),
+          );
+        }
 
-   buildContainer({
-    required String urlImage,
-    required String nome,
-    required String adotado,
-    required String historia,
-  }) {
-    return Container(
-      margin: EdgeInsets.all(15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                child: Image.network(urlImage, height: 300, fit: BoxFit.cover),
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ],
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Padding(
+            padding: EdgeInsets.all(16),
+            child: Text(
+              'Nenhum animal disponível para adoção no momento.',
+            ),
+          );
+        }
+
+        List<PetAdocao> listaPets = snapshot.data!;
+
+        return Padding(
+          padding: const EdgeInsets.only(
+            top: 16,
+            bottom: 12,
           ),
-          SizedBox(height: 4),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                nome,
-                style: GoogleFonts.inter(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  'Animais procurando uma família',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              Row(children: [Icon(Icons.pets, size: 16), Text('')]),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(16, 4, 16, 12),
+                child: Text(
+                  'Animais disponíveis para adoção encontrados na Adoteca.',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: listaPets.length,
+                itemBuilder: (context, index) {
+                  PetAdocao pet = listaPets[index];
+
+                  return buildCardPet(pet);
+                },
+              ),
             ],
           ),
+        );
+      },
+    );
+  }
 
-          Text(adotado),
-          Text(historia),
-        ],
+  Widget buildCardPet(PetAdocao pet) {
+    return Card(
+      margin: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (pet.imagem.isNotEmpty)
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.network(
+                  pet.imagem,
+                  height: 180,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      height: 180,
+                      color: Colors.grey[200],
+                      child: const Center(
+                        child: Icon(
+                          Icons.pets,
+                          size: 50,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            const SizedBox(height: 10),
+            Text(
+              pet.nome,
+              style: const TextStyle(
+                fontSize: 19,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text('Espécie: ${pet.especie}'),
+            Text('Cidade: ${pet.cidade}'),
+            const SizedBox(height: 8),
+            Text(
+              pet.descricao,
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 10),
+            if (pet.urlAdocao.isNotEmpty)
+              Align(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final uri = Uri.tryParse(pet.urlAdocao);
+
+                    if (uri != null) {
+                      await launchUrl(
+                        uri,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                  child: const Text('Ver anúncio'),
+                ),
+              ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget buildHistorias() {
+    return FutureBuilder<List<HistoriaAnimal>>(
+      future: futureLista,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Padding(
+            padding: EdgeInsets.all(20),
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (snapshot.hasError) {
+          return Center(
+            child: Text(
+              'Erro ao carregar histórias: ${snapshot.error}',
+            ),
+          );
+        }
+
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const Center(
+            child: Text('Nenhuma história encontrada.'),
+          );
+        }
+
+        List<HistoriaAnimal> listaHistorias =
+        snapshot.data!;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(16, 12, 16, 8),
+              child: Text(
+                'Histórias de animais adotados',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: listaHistorias.length,
+              itemBuilder: (context, index) {
+                return ContainerHistoria(
+                  historia: listaHistorias[index],
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
