@@ -12,7 +12,7 @@ class AdocaoDao{
       Propriedade propriedade = Propriedade.fromJson(json);
       listaPropriedades.add(propriedade);
     }
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 3));
     return listaPropriedades;
   }
 }

@@ -2,10 +2,13 @@ import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:projeto_pmo/domain/propriedade.dart";
 
+
 class ContainerAdocao extends StatefulWidget {
+
 
   Propriedade propriedade;
   String imagemApi;
+
 
   ContainerAdocao({
     super.key,
@@ -13,11 +16,14 @@ class ContainerAdocao extends StatefulWidget {
     required this.imagemApi,
   });
 
+
   @override
   State<ContainerAdocao> createState() => _ContainerAdocaoState();
 }
 
+
 class _ContainerAdocaoState extends State<ContainerAdocao> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +32,11 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
       padding: EdgeInsets.all(16),
       margin: EdgeInsets.all(16),
 
+
       decoration: BoxDecoration(
         color: Color(0xFF8FB9E3),
         borderRadius: BorderRadius.circular(16),
+
 
         boxShadow: [
           BoxShadow(
@@ -39,10 +47,13 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
         ],
       ),
 
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
 
+
         children: [
+
 
           // IMAGEM DO BANCO DE DADOS
           ClipRRect(
@@ -55,16 +66,21 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
             ),
           ),
 
+
           const SizedBox(height: 4),
+
 
           // NOME E ONG
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
+
             children: [
+
 
               Text(
                 widget.propriedade.nome,
+
 
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.bold,
@@ -72,9 +88,11 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
                 ),
               ),
 
+
               Row(
                 children: [
                   Text('ONG: Patinha feliz '),
+
 
                   Icon(
                     Icons.pets,
@@ -85,7 +103,9 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
             ],
           ),
 
+
           SizedBox(height: 2),
+
 
           // INFORMAÇÕES DO ANIMAL
           Text(widget.propriedade.genero),
@@ -94,7 +114,9 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
           Text(widget.propriedade.porte),
           Text(widget.propriedade.raca),
 
+
           SizedBox(height: 8),
+
 
           // VACINADO E CASTRADO
           pin(
@@ -102,7 +124,9 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
             castrado: widget.propriedade.castrado,
           ),
 
+
           SizedBox(height: 16),
+
 
           const Padding(
             padding: EdgeInsets.only(
@@ -118,9 +142,11 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
             ),
           ),
 
+
           // IMAGEM DA API DOG CEO
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
+
 
             child: Image.network(
               widget.imagemApi,
@@ -131,31 +157,39 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
           ),
 
 
+
+
         ],
       ),
     );
   }
+
 
   pin({
     required String vacina,
     required String castrado,
   }) {
 
+
     return Row(
       children: [
+
 
         Container(
           width: 70,
           height: 25,
+
 
           decoration: BoxDecoration(
             color: Colors.green,
             borderRadius: BorderRadius.circular(16),
           ),
 
+
           child: Center(
             child: Text(
               vacina,
+
 
               style: TextStyle(
                 fontSize: 13,
@@ -164,18 +198,22 @@ class _ContainerAdocaoState extends State<ContainerAdocao> {
           ),
         ),
 
+
         Container(
           width: 70,
           height: 25,
+
 
           decoration: BoxDecoration(
             color: Colors.lightBlueAccent,
             borderRadius: BorderRadius.circular(16),
           ),
 
+
           child: Center(
             child: Text(
               castrado,
+
 
               style: TextStyle(
                 fontSize: 13,
