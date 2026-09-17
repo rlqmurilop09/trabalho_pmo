@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:projeto_pmo/api/historias_api.dart';
 import 'package:projeto_pmo/api/adocao_api.dart';
 import 'package:projeto_pmo/domain/historia_animal.dart';
@@ -171,23 +170,6 @@ class _HistoriasState extends State<Historias> {
               overflow: TextOverflow.ellipsis,
             ),
             const SizedBox(height: 10),
-            if (pet.urlAdocao.isNotEmpty)
-              Align(
-                alignment: Alignment.centerRight,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    final uri = Uri.tryParse(pet.urlAdocao);
-
-                    if (uri != null) {
-                      await launchUrl(
-                        uri,
-                        mode: LaunchMode.externalApplication,
-                      );
-                    }
-                  },
-                  child: const Text('Ver anúncio'),
-                ),
-              ),
           ],
         ),
       ),
