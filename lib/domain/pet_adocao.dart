@@ -30,7 +30,7 @@ class PetAdocao {
             json['adoptionUrl'] ??
             json['url'] ??
             '',
-        imagem = json['image'] ??
+        imagem = json['photo_url'] ??
             json['image_url'] ??
             json['photo'] ??
             '';

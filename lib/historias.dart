@@ -188,8 +188,9 @@ class _HistoriasState extends State<Historias> {
               topRight: Radius.circular(20),
             ),
             child: Image.network(
-              escolherImagem(pet),
-              height: 190,
+              pet.imagem,
+              //escolherImagem(pet),
+              height: 250,
               width: double.infinity,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
