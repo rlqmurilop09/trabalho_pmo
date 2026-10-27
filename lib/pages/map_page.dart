@@ -2,14 +2,15 @@ import'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
 
   @override
-  State<MapPage> createState() => _MapPageState();
+  State<MapPage> createState() =>  MapPageState();
 }
 
-class MapSampleState extends State<MapPage> {
+class MapSampleState extends State<MapSample> {
   final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
@@ -47,7 +48,3 @@ class MapSampleState extends State<MapPage> {
     await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
-
-mixin GoogleMapController {
-}
-
