@@ -3,6 +3,10 @@
         android:label="projeto_pmo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBMXH7sQxAQjWn_KpufrQRvAHw6r17OOL0"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

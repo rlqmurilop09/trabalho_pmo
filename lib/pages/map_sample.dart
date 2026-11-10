@@ -13,8 +13,8 @@ class MapSample extends StatefulWidget {
 class MapSampleState extends State<MapSample> {
   final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
 
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
+  static const CameraPosition _cameraPosition = CameraPosition(
+    target: LatLng(-10.268738753169336, -37.01460170914647),
     zoom: 14.4746,
   );
 
@@ -22,7 +22,7 @@ class MapSampleState extends State<MapSample> {
     bearing: 192.8334901395799,
     target: LatLng(37.43296265331129, -122.08832357078792),
     tilt: 59.440717697143555,
-    zoom: 19.151926040649414,
+    zoom: 14,
   );
 
   @override
@@ -30,16 +30,12 @@ class MapSampleState extends State<MapSample> {
     return Scaffold(
       body: GoogleMap(
         mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
+        initialCameraPosition: _cameraPosition,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
-      ),
+
     );
   }
 
